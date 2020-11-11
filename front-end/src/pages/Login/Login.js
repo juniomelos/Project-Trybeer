@@ -6,8 +6,8 @@ import { userLogin } from '../../store/ducks/user';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.user);
-
+  const session = useSelector((state) => state.userReducer.session);
+  
   useEffect(() => {
     dispatch(userLogin());
   }, []);

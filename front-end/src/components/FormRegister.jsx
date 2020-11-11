@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
-import './FormLogin.css';
 
-const FormLogin = () => {
-  // Route to /Register 
-  const history = useHistory();
+const FormRegister = () => {
+
   function handleClick() {
-    history.push("/register");
+    console.log('handleClick clicked');
   }
+
   // Set all local Action/Reducers
   const [user, setUser] = useState({
+    name: '',
     email: '',
     password: '',
+    admin: false,
   });
 
   const [inputsValid, setInputsValid] = useState(
@@ -21,7 +21,9 @@ const FormLogin = () => {
   // Each time user is updated password and email are checked if are valid 
   useEffect(() => {
     const regexEmail = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
-    if (user.password.length > 5 && regexEmail.test(user.email)) {
+    const regexName = /\w{12}/i;
+
+    if (user.password.length > 5 && regexEmail.test(user.email) && regexName.test(user.name)) {
       setInputsValid(false)
     } else {
       setInputsValid(true)
@@ -29,14 +31,18 @@ const FormLogin = () => {
   }, [user]);
 
   return (
-
     <div>
-      <h1>
-        Here is FormLogin
-    </h1>
       <form className="formContainer">
+        <input name="name" type="text"
+          data-testid="signup-name"
+          placeholder="Digit seu nome"
+          value={user.name}
+          onChange={(event) =>
+            setUser({ ...user, [event.target.name]: event.target.value })
+          }
+        />
         <input name="email" type="email"
-          data-testid="email-input"
+          data-testid="signup-email"
           placeholder="Digit seu email"
           value={user.email}
           onChange={(event) =>
@@ -44,22 +50,30 @@ const FormLogin = () => {
           }
         />
         <input name="password" type="password"
-          data-testid="password-input"
+          data-testid="signup-password"
           placeholder="Digit seu password"
           value={user.password}
           onChange={(event) =>
             setUser({ ...user, [event.target.name]: event.target.value })
           }
         />
-        <button data-testid="signin-btn" type="submit" disabled={inputsValid}>ENTRAR</button>
+        <label>
+          Quero Vender
+          <input
+            data-testid="signup-seller"
+            name="admin" type="checkbox"
+            checked={user.admin}
+            onChange={(event) =>
+              setUser({ ...user, [event.target.name]: !user.admin })
+            }
+          />
+        </label>
+        <button data-testid="signup-btn" type="submit" onClick={handleClick} disabled={inputsValid}>CADASTRAR</button>
       </form>
-      <div>
-        <button data-testid="no-account-btn" onClick={handleClick}
-        > Ainda nao tenho conta</button>
-      </div>
+
     </div>
 
   )
 }
 
-export default FormLogin
+export default FormRegister

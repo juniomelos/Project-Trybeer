@@ -26,7 +26,7 @@ const initialState = {
   errors: [],
 };
 
-const userReducer = (state = initialState, {type, payload}) => {
+const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case Types.LOGIN:
       console.log(payload);
@@ -34,7 +34,7 @@ const userReducer = (state = initialState, {type, payload}) => {
         ...state,
         isLoggedIn: true,
         user: payload.user,
-        session: payload.session,
+        session: { token: payload.token },
       };
     case Types.LOGOUT:
       return { initialState };
@@ -69,6 +69,7 @@ export const hasErrored = (error) => ({
 export const userLogin = (user) => (dispatch) => {
   UserService.userLogin('caio@caio.com', 'dsafddsa4fads5fds')
     .then((userLogin) => {
+      console.log(userLogin);
       //REMOVER - ONLY FOR TEST
       const DATA = {
         token: 'f4das5d4f6asdf5f64af4d5sf.f4dsaf44',

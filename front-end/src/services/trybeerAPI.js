@@ -16,21 +16,24 @@ class UserService {
   }
 
   handleSuccess = (response) => {
-    console.log(response);
     return response;
   };
 
   handleError = (error) => {
+    let errorMsg;
+
     switch (error.response.status) {
       case 500:
-        throw new {
+        errorMsg = {
           error: { message: 'User not found or wrong password', code: 500 },
-        }();
+        };
         break;
 
       default:
         break;
     }
+
+    throw new errorMsg();
   };
 
   async userLogin(email, password) {
@@ -40,7 +43,7 @@ class UserService {
     };
 
     // Trocar para post - login seguro
-    return this.http.post('/', { body });
+    return this.http.get('/', { body });
   }
 }
 
