@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 
 app.use(cors());
-app.use('/login', route.loginRouter);
-
+// console.log(route.loginRouter.loginRouter);
+app.use('/login', route.loginRouter.loginRouter);
 
 // app.use('/images', express.static(path.join(__dirname, 'images')));
 

@@ -6,4 +6,4 @@ const loginRouter = Router();
 
 loginRouter.post('/', middleware.validateLogin, loginCont.loginUsersCont);
 
-module.exports = loginRouter;
+module.exports = { loginRouter };

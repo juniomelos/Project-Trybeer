@@ -6,10 +6,11 @@ const userLoginServ = async (userEmail, userPassword) => {
 
   const { password, ...userData } = user;
 
-  if (user || userPassword === password) {
-    console.log(userPassword, password);
+  if (user && userPassword === password) {
     const token = createToken(userData);
     return { token, userData };
+  } else {
+    throw Error('Login ou senha inválido');
   }
 };
 

@@ -18,6 +18,7 @@ const getUserByEmailMod = async (userEmail) => {
       role,
     };
   } catch (error) {
+    console.log(error);
     return error;
   }
 };
