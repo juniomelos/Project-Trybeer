@@ -9,7 +9,7 @@ const getUserByEmailMod = async (userEmail) => {
       .where('email = :email')
       .bind('email', userEmail)
       .execute();
-    const [id, name, email, password, role] = await usersDB.fetchAll();
+    const [id, name, email, password, role] = await usersDB.fetchOne();
     return {
       id,
       name,

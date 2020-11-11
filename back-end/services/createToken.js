@@ -4,7 +4,7 @@ const secret = 'cookmasterv2';
 
 const createToken = (payload) => {
   const headers = {
-    expiresIn: '1h',
+    expiresIn: '1d',
     algorithm: 'HS256',
   };
 

@@ -4,6 +4,6 @@ const middleware = require('../middlewares');
 
 const loginRouter = Router();
 
-loginRouter.post('/', middleware.authJWT, controller.loginUsersCont);
+loginRouter.get('/', middleware.validateLogin, controller.loginUsersCont);
 
 module.exports = loginRouter;

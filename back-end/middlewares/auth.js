@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const model = require('../models/usersModel');
 
 const secret = 'trybeergroup9';
 
@@ -11,13 +10,9 @@ const authJWT = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, secret);
+    const data = jwt.verify(token, secret);
 
-    const { email } = decoded.data;
-
-    const user = await model.getUserByEmailMod(email);
-
-    req.user = user;
+    req.user = data;
     next();
   } catch (err) {
     return res.status(401).json({ message: 'jwt malformed' });
