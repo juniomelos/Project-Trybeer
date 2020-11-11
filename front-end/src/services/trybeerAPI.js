@@ -3,7 +3,7 @@ import axios from 'axios';
 class UserService {
   constructor() {
     const url =
-      'https://my-json-server.typicode.com/pedrotpo/trybeer-mockapi/users';
+      'http://localhost:3001/login';
     const timeout = 30000;
 
     this.http = axios.create({
@@ -43,7 +43,7 @@ class UserService {
     };
 
     // Trocar para post - login seguro
-    return this.http.get('/', { body });
+    return this.http.post('/', { body });
   }
 }
 
