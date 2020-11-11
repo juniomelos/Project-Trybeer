@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FormLogin from '../../components/FormLogin';
 
-const Login = () => (
-  <div>
-    <FormLogin />
-  </div>
-);
+import { userLogin } from '../../store/ducks/user';
+
+const Login = () => {
+  const session = useSelector((state) => state.userReducer.session);
+
+  return (
+    <div>
+      <FormLogin />
+    </div>
+  );
+};
 
 export default Login;
