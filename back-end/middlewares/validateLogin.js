@@ -9,8 +9,7 @@ const validateLogin = (req, _res, next) => {
   const { email, password } = req.body;
 
   const result = schema.validate({ email, password });
-
-  if (result.error) throw result.error;
+  if (result.error) return result.error;
   next();
 };
 

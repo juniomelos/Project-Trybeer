@@ -21,7 +21,7 @@ app.use((error, _req, res, _next) => {
   if (status < 500) {
     return res.status(status).json(message);
   }
-  res.status(500).send('Something broke!');
+  res.status(500).send('Broke: ' + message);
 });
 
 app.listen(PORT, () => console.log(`Listening PORT ${PORT}`));

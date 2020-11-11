@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'cookmasterv2';
+const secret = 'trybeerGroup9';
 
 const createToken = (payload) => {
   const headers = {

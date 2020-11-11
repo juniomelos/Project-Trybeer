@@ -1,5 +1,5 @@
 const createToken = require('./createToken');
-const userLoginServ = require('./loginServices')
+const { userLoginServ } = require('./loginServices');
 
 module.exports = {
   createToken,
