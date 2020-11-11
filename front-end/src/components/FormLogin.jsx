@@ -1,41 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { saveToLocalStorage } from '../services/localStorage';
+import { userLogin } from '../store/ducks/user';
 import './FormLogin.css';
 
 const FormLogin = () => {
-  // Route to /Register 
+  // Route to /Register
   const history = useHistory();
-  function handleClick() {
-    history.push("/register");
-  }
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
+  const { token } = useSelector((state) => state.userReducer.session);
+  const userData = useSelector((state) => state.userReducer.user);
+
   // Set all local Action/Reducers
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
+  const [inputsValid, setInputsValid] = useState(true);
 
-  const [inputsValid, setInputsValid] = useState(
-    true,
-  );
+  useEffect(() => {
+    if (isLoggedIn) {
+      saveToLocalStorage('user', { token, ...userData });
 
-  // Each time user is updated password and email are checked if are valid 
+      userData.role === 'user'
+        ? history.push('/products')
+        : history.push('/admin/orders');
+    }
+  }, [isLoggedIn]);
+
+  function handleClick() {
+    dispatch(userLogin(user.email, user.password)); //async
+  }
+
+  // Each time user is updated password and email are checked if are valid
   useEffect(() => {
     const regexEmail = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
     if (user.password.length > 5 && regexEmail.test(user.email)) {
-      setInputsValid(false)
+      setInputsValid(false);
     } else {
-      setInputsValid(true)
+      setInputsValid(true);
     }
   }, [user]);
 
   return (
-
     <div>
-      <h1>
-        Here is FormLogin
-    </h1>
+      <h1>Here is FormLogin</h1>
       <form className="formContainer">
-        <input name="email" type="email"
+        <input
+          name="email"
+          type="email"
           data-testid="email-input"
           placeholder="Digit seu email"
           value={user.email}
@@ -43,7 +58,9 @@ const FormLogin = () => {
             setUser({ ...user, [event.target.name]: event.target.value })
           }
         />
-        <input name="password" type="password"
+        <input
+          name="password"
+          type="password"
           data-testid="password-input"
           placeholder="Digit seu password"
           value={user.password}
@@ -51,15 +68,26 @@ const FormLogin = () => {
             setUser({ ...user, [event.target.name]: event.target.value })
           }
         />
-        <button data-testid="signin-btn" type="submit" disabled={inputsValid}>ENTRAR</button>
+        <button
+          data-testid="signin-btn"
+          type="button"
+          disabled={inputsValid}
+          onClick={handleClick}
+        >
+          ENTRAR
+        </button>
       </form>
       <div>
-        <button data-testid="no-account-btn" onClick={handleClick}
-        > Ainda nao tenho conta</button>
+        <button
+          data-testid="no-account-btn"
+          onClick={() => history.push('/register')}
+        >
+          {' '}
+          Ainda nao tenho conta
+        </button>
       </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default FormLogin
+export default FormLogin;

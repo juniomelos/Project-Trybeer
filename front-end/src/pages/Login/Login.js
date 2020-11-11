@@ -5,12 +5,7 @@ import FormLogin from '../../components/FormLogin';
 import { userLogin } from '../../store/ducks/user';
 
 const Login = () => {
-  const dispatch = useDispatch();
   const session = useSelector((state) => state.userReducer.session);
-  
-  useEffect(() => {
-    dispatch(userLogin());
-  }, []);
 
   return (
     <div>

@@ -66,10 +66,9 @@ export const hasErrored = (error) => ({
 
 /** Actions Creators */
 
-export const userLogin = (user) => (dispatch) => {
-  UserService.userLogin('caio@caio.com', 'dsafddsa4fads5fds')
+export const userLogin = (user, password) => (dispatch) => {
+  UserService.userLogin(user, password)
     .then((userLogin) => {
-      console.log(userLogin);
       //REMOVER - ONLY FOR TEST
       const DATA = {
         token: 'f4das5d4f6asdf5f64af4d5sf.f4dsaf44',
