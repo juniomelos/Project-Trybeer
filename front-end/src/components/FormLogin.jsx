@@ -9,9 +9,6 @@ const FormLogin = () => {
   // Route to /Register
   const history = useHistory();
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
-  const { token } = useSelector((state) => state.userReducer.session);
-  const userData = useSelector((state) => state.userReducer.user);
 
   // Set all local Action/Reducers
   const [user, setUser] = useState({
@@ -19,16 +16,6 @@ const FormLogin = () => {
     password: '',
   });
   const [inputsValid, setInputsValid] = useState(true);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      saveToLocalStorage('user', { token, ...userData });
-
-      userData.role === 'user'
-        ? history.push('/products')
-        : history.push('/admin/orders');
-    }
-  }, [isLoggedIn]);
 
   function handleClick() {
     dispatch(userLogin(user.email, user.password)); //async
