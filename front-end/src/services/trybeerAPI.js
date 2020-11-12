@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class UserService {
   constructor() {
-    const url = 'http://localhost:3001/login';
+    const url = 'http://localhost:3001';
     const timeout = 30000;
 
     this.http = axios.create({
@@ -35,14 +35,21 @@ class UserService {
     throw new errorMsg();
   };
 
-  async userLogin(email, password) {
+  /** User login */
+  userLogin = async (body) => this.http.post('/login', body);
+
+  /** User signup */
+  userSignup = async (userData) => {
+    const { email, name, password, admin } = userData;
+
     const body = {
       email,
+      name,
       password,
+      role: admin ? 'admin' : 'user',
     };
 
-    // Trocar para post - login seguro
-    return this.http.post('/', { body });
+    return this.http.post('/signup', body)
   }
 
   async userNameUpdate(email, name) {

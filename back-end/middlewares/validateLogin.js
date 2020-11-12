@@ -7,10 +7,15 @@ const schema = joi.object({
 
 const validateLogin = (req, _res, next) => {
   const { email, password } = req.body;
+  const { error } = schema.validate({ email, password });
 
-  const result = schema.validate({ email, password });
-  if (result.error) return result.error;
-  next();
+  // if (error) {
+  //   throw ('Login our password incorrects!')
+  //   // return res.status(500).json({ message: 'Login our password incorrects!' });
+  // }
+  console.log('req.body', req.body);
+  if (error) throw error;
+  return next();
 };
 
 module.exports = validateLogin;
