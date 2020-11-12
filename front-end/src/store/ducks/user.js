@@ -33,7 +33,7 @@ const userReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoggedIn: true,
-        user: payload.user,
+        user: payload.userData,
         session: { token: payload.token },
       };
     case Types.LOGOUT:
@@ -47,11 +47,11 @@ const userReducer = (state = initialState, { type, payload }) => {
 
 /** Actions */
 
-export const login = ({ token, user }) => ({
+export const login = ({ token, userData }) => ({
   type: Types.LOGIN,
   payload: {
     token,
-    user,
+    userData,
   },
 });
 
@@ -66,15 +66,12 @@ export const hasErrored = (error) => ({
 
 /** Actions Creators */
 
-export const userLogin = (user, password) => (dispatch) => {
-  UserService.userLogin(user, password)
+export const userLogin = (email, password) => (dispatch) => {
+  UserService.userLogin({ email, password })
     .then((userLogin) => {
-      //REMOVER - ONLY FOR TEST
-      const DATA = {
-        token: 'f4das5d4f6asdf5f64af4d5sf.f4dsaf44',
-        user: userLogin.data,
-      };
-      dispatch(login(DATA));
+      const { token, userData } = userLogin.data;
+      
+      dispatch(login({ token, userData }));
     })
     .catch((error) => dispatch(hasErrored(error)));
 };
