@@ -38,7 +38,7 @@ class UserService {
   /** User login */
   userLogin = async (body) => this.http.post('/login', body);
 
-  /** User signup */
+  /** Usersignup */
   userSignup = async (userData) => {
     const { email, name, password, admin } = userData;
 
