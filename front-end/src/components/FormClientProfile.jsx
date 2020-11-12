@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogin } from '../store/ducks/user';
-
+// import UserService  from '../services/trybeerAPI';
+import { userNameUpdate } from '../store/ducks/user';
 
 
 const FormClientProfile = () => {
 
   // Set all local Action/Reducers
   const userData = useSelector((state) => state.userReducer.user);
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     name: userData.name,
@@ -19,13 +20,22 @@ const FormClientProfile = () => {
 
   function handleClick() {
     console.log('handleClick clicked');
+    dispatch(userNameUpdate(user.name, userData.email)); //async
+
+
+    // UserService.userNameUpdate(user.name, userData.email)
+    //   .then(
+    //     (data) => console.log(data),
+    //     (error) => console.log(error.message),
+    //   );
+
   }
 
   // Each time user is updated name is checked if are valid 
   useEffect(() => {
     const regexName = /\w{12}/i;
 
-    if (regexName.test(user.name) && user.name != userData.name) {
+    if (regexName.test(user.name) && user.name !== userData.name) {
       setInputsValid(false)
     } else {
       setInputsValid(true)
@@ -51,8 +61,8 @@ const FormClientProfile = () => {
             setUser({ ...user, [event.target.name]: event.target.value })
           }
         />
-        <button data-testid="profile-save-btn" type="submit" onClick={handleClick} disabled={inputsValid}>CADASTRAR</button>
       </form>
+        <button data-testid="profile-save-btn" onClick={handleClick} disabled={inputsValid}>CADASTRAR</button>
     </div>
   )
 }
