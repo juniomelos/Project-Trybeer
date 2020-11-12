@@ -8,19 +8,20 @@ export const Types = {
   SIGNUP: 'SIGNUP',
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
+  SIGNUP: 'SIGNUP',
   ERROR: 'ERROR',
 };
 
 /** Reducers */
 
 const initialState = {
-  isLoggedIn: false,
   user: {
     name: '',
     email: '',
     role: '',
   },
   session: {
+    isLoggedIn: false,
     token: '',
   },
   errors: [],
@@ -29,12 +30,10 @@ const initialState = {
 const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case Types.LOGIN:
-      console.log(payload);
       return {
         ...state,
-        isLoggedIn: true,
         user: payload.userData,
-        session: { token: payload.token },
+        session: { isLoggedIn: true, token: payload.token },
       };
     case Types.LOGOUT:
       return { initialState };
@@ -70,8 +69,21 @@ export const userLogin = (email, password) => (dispatch) => {
   UserService.userLogin({ email, password })
     .then((userLogin) => {
       const { token, userData } = userLogin.data;
-      
+
       dispatch(login({ token, userData }));
+    })
+    .catch((error) => dispatch(hasErrored(error)));
+};
+
+export const userSignup = (userData) => (dispatch) => {
+  UserService.userSignup(userData)
+    .then((response) => {
+      /** Verifica se o recurso foi criado no BD e procede */
+      /** Faz login se ok */
+      if (response.status === 201) {      
+        const { token, userData } = response.data;
+        dispatch(login({ token, userData }));
+      }
     })
     .catch((error) => dispatch(hasErrored(error)));
 };

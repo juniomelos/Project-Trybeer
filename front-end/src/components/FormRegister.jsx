@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { userSignup } from '../store/ducks/user';
 
 const FormRegister = () => {
-
-  function handleClick() {
-    console.log('handleClick clicked');
-  }
-
   // Set all local Action/Reducers
   const [user, setUser] = useState({
     name: '',
@@ -14,26 +11,34 @@ const FormRegister = () => {
     admin: false,
   });
 
-  const [inputsValid, setInputsValid] = useState(
-    true,
-  );
+  const [inputsValid, setInputsValid] = useState(true);
 
-  // Each time user is updated password and email are checked if are valid 
+  const dispatch = useDispatch();
+
+  // Each time user is updated password and email are checked if are valid
   useEffect(() => {
     const regexEmail = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
     const regexName = /\w{12}/i;
 
-    if (user.password.length > 5 && regexEmail.test(user.email) && regexName.test(user.name)) {
-      setInputsValid(false)
+    if (
+      user.password.length > 5 &&
+      regexEmail.test(user.email) &&
+      regexName.test(user.name)
+    ) {
+      setInputsValid(false);
     } else {
-      setInputsValid(true)
+      setInputsValid(true);
     }
   }, [user]);
+
+  const handleClick = () => dispatch(userSignup(user));
 
   return (
     <div>
       <form className="formContainer">
-        <input name="name" type="text"
+        <input
+          name="name"
+          type="text"
           data-testid="signup-name"
           placeholder="Digit seu nome"
           value={user.name}
@@ -41,7 +46,9 @@ const FormRegister = () => {
             setUser({ ...user, [event.target.name]: event.target.value })
           }
         />
-        <input name="email" type="email"
+        <input
+          name="email"
+          type="email"
           data-testid="signup-email"
           placeholder="Digit seu email"
           value={user.email}
@@ -49,7 +56,9 @@ const FormRegister = () => {
             setUser({ ...user, [event.target.name]: event.target.value })
           }
         />
-        <input name="password" type="password"
+        <input
+          name="password"
+          type="password"
           data-testid="signup-password"
           placeholder="Digit seu password"
           value={user.password}
@@ -61,19 +70,25 @@ const FormRegister = () => {
           Quero Vender
           <input
             data-testid="signup-seller"
-            name="admin" type="checkbox"
+            name="admin"
+            type="checkbox"
             checked={user.admin}
             onChange={(event) =>
               setUser({ ...user, [event.target.name]: !user.admin })
             }
           />
         </label>
-        <button data-testid="signup-btn" type="submit" onClick={handleClick} disabled={inputsValid}>CADASTRAR</button>
+        <button
+          data-testid="signup-btn"
+          type="submit"
+          onClick={handleClick}
+          disabled={inputsValid}
+        >
+          CADASTRAR
+        </button>
       </form>
-
     </div>
+  );
+};
 
-  )
-}
-
-export default FormRegister
+export default FormRegister;

@@ -5,14 +5,12 @@ import FormLogin from '../../components/FormLogin';
 import { saveToLocalStorage } from '../../services/localStorage';
 
 const Login = () => {
-  const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn);
-  const { token } = useSelector((state) => state.userReducer.session);
+  const { token, isLoggedIn } = useSelector((state) => state.userReducer.session);
   const userData = useSelector((state) => state.userReducer.user);
   const history = useHistory();
 
   useEffect(() => {
     if (isLoggedIn) {
-      console.log(userData)
       saveToLocalStorage('user', { token, ...userData });
 
       userData.role === 'user'
