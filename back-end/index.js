@@ -13,6 +13,8 @@ app.use(express.json());
 app.use(cors());
 // console.log(route.loginRouter.loginRouter);
 app.use('/login', route.loginRouter);
+app.use('/register', route.registerRouter);
+
 
 // app.use('/images', express.static(path.join(__dirname, 'images')));
 
