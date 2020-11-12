@@ -43,7 +43,7 @@ class UserService {
     };
 
     // Trocar para post - login seguro
-    return this.http.post('/', { email, password });
+    return this.http.post('/', body);
   }
 }
 
