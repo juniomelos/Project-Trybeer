@@ -21,9 +21,7 @@ function App() {
     const userData = loadFromLocalStorage('user');
     if (userData != null) {
       const decoded = jwt_decode(userData.token);
-      console.log('token decoded', decoded);
-      const now = Date.now().valueOf() / 1000;
-      console.log("now", now, decoded.exp);
+      const now = Date.now().valueOf() / 1000; //inspiration from web Stackflow
       if (typeof decoded.exp !== 'undefined' && decoded.exp > now) {
         const user = {
           name: userData.name,
