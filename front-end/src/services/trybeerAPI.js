@@ -2,8 +2,7 @@ import axios from 'axios';
 
 class UserService {
   constructor() {
-    const url =
-      'https://my-json-server.typicode.com/pedrotpo/trybeer-mockapi/users';
+    const url = 'http://localhost:3001/login';
     const timeout = 30000;
 
     this.http = axios.create({
@@ -43,7 +42,17 @@ class UserService {
     };
 
     // Trocar para post - login seguro
-    return this.http.get('/', { body });
+    return this.http.post('/', { body });
+  }
+
+  async userNameUpdate(email, name) {
+    console.log('inside trybeerAPI userNameUpdate');
+    const body = {
+      email,
+      name,
+    };
+
+    return this.http.put('/', { body });
   }
 }
 
