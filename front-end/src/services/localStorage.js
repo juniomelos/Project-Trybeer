@@ -5,7 +5,7 @@ export const saveToLocalStorage = (key, entry) => {
   }
   localStorage.setItem(key, formattedEntry);
 };
-
+// need to add the case empty key
 export const loadFromLocalStorage = (key) => {
   if (key === 'user') return JSON.parse(localStorage.getItem(key));
 

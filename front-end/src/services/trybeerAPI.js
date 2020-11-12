@@ -38,7 +38,7 @@ class UserService {
   /** User login */
   userLogin = async (body) => this.http.post('/login', body);
 
-  /** Usersignup */
+  /** User signup */
   userSignup = async (userData) => {
     const { email, name, password, admin } = userData;
 
@@ -50,6 +50,16 @@ class UserService {
     };
 
     return this.http.post('/signup', body)
+  }
+
+  async userNameUpdate(email, name) {
+    console.log('inside trybeerAPI userNameUpdate');
+    const body = {
+      email,
+      name,
+    };
+
+    return this.http.put('/', { body });
   }
 }
 
