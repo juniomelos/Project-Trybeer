@@ -88,4 +88,12 @@ export const userSignup = (userData) => (dispatch) => {
     .catch((error) => dispatch(hasErrored(error)));
 };
 
+export const userNameUpdate = (name, email) => (dispatch) => {
+  UserService.userNameUpdate(name, email)
+    .then((DATA) => {
+      dispatch(login(DATA));
+    })
+    .catch((error) => dispatch(hasErrored(error)));
+};
+
 export default userReducer;

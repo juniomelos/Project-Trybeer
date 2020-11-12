@@ -51,6 +51,16 @@ class UserService {
 
     return this.http.post('/signup', body)
   }
+
+  async userNameUpdate(email, name) {
+    console.log('inside trybeerAPI userNameUpdate');
+    const body = {
+      email,
+      name,
+    };
+
+    return this.http.put('/', { body });
+  }
 }
 
 export default new UserService();
