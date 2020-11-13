@@ -18,7 +18,6 @@ const FormRegister = () => {
   // Each time user is updated password and email are checked if are valid
   useEffect(() => {
     const regexEmail = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
-    // const regexName = /\w[^0-9]{12}$/i;
     const regexName = /^[a-zA-Z]{12}$/;
     ;
 
