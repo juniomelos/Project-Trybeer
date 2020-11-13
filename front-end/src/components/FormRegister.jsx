@@ -18,7 +18,9 @@ const FormRegister = () => {
   // Each time user is updated password and email are checked if are valid
   useEffect(() => {
     const regexEmail = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
-    const regexName = /\w{12}/i;
+    // const regexName = /\w[^0-9]{12}$/i;
+    const regexName = /^[a-zA-Z]{12}$/;
+    ;
 
     if (
       user.password.length > 5 &&
@@ -36,36 +38,45 @@ const FormRegister = () => {
   return (
     <div>
       <form className="formContainer">
+        <label>
+          Nome
         <input
-          name="name"
-          type="text"
-          data-testid="signup-name"
-          placeholder="Digit seu nome"
-          value={user.name}
-          onChange={(event) =>
-            setUser({ ...user, [event.target.name]: event.target.value })
-          }
-        />
+            name="name"
+            type="text"
+            data-testid="signup-name"
+            placeholder="Digit seu nome"
+            value={user.name}
+            onChange={(event) =>
+              setUser({ ...user, [event.target.name]: event.target.value })
+            }
+          />
+        </label>
+        <label>
+          Email
         <input
-          name="email"
-          type="email"
-          data-testid="signup-email"
-          placeholder="Digit seu email"
-          value={user.email}
-          onChange={(event) =>
-            setUser({ ...user, [event.target.name]: event.target.value })
-          }
-        />
+            name="email"
+            type="email"
+            data-testid="signup-email"
+            placeholder="Digit seu email"
+            value={user.email}
+            onChange={(event) =>
+              setUser({ ...user, [event.target.name]: event.target.value })
+            }
+          />
+        </label>
+        <label>
+          Password
         <input
-          name="password"
-          type="password"
-          data-testid="signup-password"
-          placeholder="Digit seu password"
-          value={user.password}
-          onChange={(event) =>
-            setUser({ ...user, [event.target.name]: event.target.value })
-          }
-        />
+            name="password"
+            type="password"
+            data-testid="signup-password"
+            placeholder="Digit seu password"
+            value={user.password}
+            onChange={(event) =>
+              setUser({ ...user, [event.target.name]: event.target.value })
+            }
+          />
+        </label>
         <label>
           Quero Vender
           <input
@@ -84,7 +95,7 @@ const FormRegister = () => {
           onClick={handleClick}
           disabled={inputsValid}
         >
-          CADASTRAR
+          Cadastrar
         </button>
       </form>
     </div>
