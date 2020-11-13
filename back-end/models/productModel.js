@@ -7,16 +7,13 @@ const getAllProductMod = async () => {
       .getTable('products')
       .select(['id', 'name', 'price', 'url_image'])
       .execute();
-    const [id, name, price, url_image] = await prodDB.fetchAll();
-    const all = await prodDB.fetchAll();
-
-    console.log('prodDB', await Promise.all(all));
-    return {
+    const allProducts = await prodDB.fetchAll();
+    return allProducts.map(([id, name, price, url_image]) => ({
       id,
       name,
       price,
       url_image,
-    };
+    }));
   } catch (error) {
     console.log(error);
     return error;

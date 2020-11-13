@@ -14,12 +14,9 @@ app.use(express.json());
 app.use(cors());
 // console.log(route.loginRouter.loginRouter);
 app.use('/login', route.loginRouter);
-<<<<<<< Updated upstream
 app.use('/register', route.registerRouter);
 
-=======
 app.get('/products', controllers.getAllProducts);
->>>>>>> Stashed changes
 
 // app.use('/images', express.static(path.join(__dirname, 'images')));
 
