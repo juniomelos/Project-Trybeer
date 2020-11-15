@@ -22,7 +22,7 @@ const Header = (props) => {
 
   const Wrapper = props.wrapper; //Imported Component
 
-  if (title[location.pathname] != undefined) headTitle = title[location.pathname];
+  if (title[location.pathname] !== undefined) headTitle = title[location.pathname];
   return (
     <div>
       <div className="headerContainer">
