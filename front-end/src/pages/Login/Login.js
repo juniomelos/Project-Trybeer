@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import FormLogin from '../../components/FormLogin';
+import Header from '../../components/Header';
 import { saveToLocalStorage } from '../../services/localStorage';
 
 const Login = () => {
@@ -21,6 +22,7 @@ const Login = () => {
 
   return (
     <div>
+      <Header></Header> 
       <FormLogin />
     </div>
   );

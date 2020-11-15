@@ -7,11 +7,8 @@ import { userNameUpdate } from '../store/ducks/user';
 const FormClientProfile = () => {
 
   // Set all local Action/Reducers
-  // const userData = useSelector((state) => state.userReducer.user);
-  const userData = {
-    name: "myname",
-    email: 'MyEmail',
-  }
+  const userData = useSelector((state) => state.userReducer.user);
+
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({

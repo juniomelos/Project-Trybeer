@@ -1,5 +1,13 @@
 .headerContainer {
+  align-items: center;
   background-color: black;
   color: white;
-  height: 60px;
+  display: flex;
+  /* height: 130px; */
+}
+
+.headTitleContainer {
+  display: flex;
+  flex-grow: 4;
+  justify-content: center;
 }
