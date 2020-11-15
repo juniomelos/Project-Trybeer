@@ -1,5 +1,5 @@
 
-.sidebarContainer {
+.side-menu-container {
   background-color: black;
   color: white;
   display: flex;
@@ -23,4 +23,9 @@ li {
   margin-top: 15px;
   padding: 5px;
   text-align: center;
+}
+
+a {
+  color: white;
+  text-decoration: none
 }

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import hamburger from '../images/hamburger.png';
 import { changeVisibility } from '../store/ducks/sideBarHide';
-
+import SideBar from '../components/SideBar';
 import './Header.css';
 
 const Header = (props) => {
@@ -11,12 +11,16 @@ const Header = (props) => {
   const location = useLocation();
   let headTitle = 'Trybeer';
   const title = {
-    '/login': 'Login'
   }
   function handleClick() {
     dispatch(changeVisibility()); //async
   }
-  // const Wrapper = props.wrapper; //Imported Component
+
+  const sideBarVisible = useSelector(
+    (state) => state.sideBarHideReducer.isVisible,
+  );
+
+  const Wrapper = props.wrapper; //Imported Component
 
   if (title[location.pathname] != undefined) headTitle = title[location.pathname];
   return (
@@ -33,7 +37,14 @@ const Header = (props) => {
           <h1 data-testid="top-title">{headTitle}</h1>
         </div>
       </div>
-      {/* <Wrapper/> */}
+      <div className="sidebarwrapper">
+        <div className="sidebar">{sideBarVisible && <SideBar />}</div>
+        <div className="maincomponent">
+          <h1> Here is Product.js</h1>
+          <Wrapper />
+
+        </div>
+      </div>
     </div>
   )
 }
