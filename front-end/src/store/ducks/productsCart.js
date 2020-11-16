@@ -7,6 +7,7 @@ export const Types = {
   ADD_TO_CART: 'ADD_TO_CART',
   REMOVE_TO_CART: 'REMOVE_TO_CART',
   LOAD_INIT_STATE: 'LOAD_INIT_STATE',
+  REMOVE_PRODUCT: 'REMOVE_PRODUCT',
 };
 
 /** Reducers */
@@ -64,12 +65,15 @@ const cartReducer = (state = initialState, { type, product }) => {
         };
       }
     case Types.LOAD_INIT_STATE:
-      console.log('Cart inside Reducer', product);
       const cart = product;
-      console.log('cart', cart );
+      return {
+        ...state,
+        cart,
+      };
+      case Types.REMOVE_PRODUCT:
         return {
           ...state,
-          cart,
+          cart: omit(state.cart, product),
         };
     default:
       return state;
@@ -90,6 +94,11 @@ export const removeToCart = (product) => ({
 
 export const loadInitCart = (product) => ({
   type: Types.LOAD_INIT_STATE,
+  product,
+});
+
+export const removeProduct = (product) => ({
+  type: Types.REMOVE_PRODUCT,
   product,
 });
 export default cartReducer;
