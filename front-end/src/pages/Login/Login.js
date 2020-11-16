@@ -14,7 +14,7 @@ const Login = () => {
     if (isLoggedIn) {
       saveToLocalStorage('user', { token, ...userData });
 
-      userData.role === 'user'
+      userData.role === 'client'
         ? history.push('/products')
         : history.push('/admin/orders');
     }
