@@ -1,5 +1,24 @@
 .headerContainer {
+  align-items: center;
   background-color: black;
   color: white;
-  height: 60px;
+  display: flex;
+}
+
+.headTitleContainer {
+  display: flex;
+  flex-grow: 4;
+  justify-content: center;
+}
+
+.sidebarwrapper {
+  display: flex;
+}
+.sidebar {
+  height: 100%;
+  width: 20%;
+}
+
+.maincomponent {
+  padding: 5px;
 }

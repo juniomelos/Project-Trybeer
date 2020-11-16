@@ -32,11 +32,11 @@ const FormLogin = () => {
   }, [user]);
 
   return (
-    <div>
-      <h1>Here is FormLogin</h1>
+    <div className="globalContainer">
       <form className="formContainer">
         <label>
           Email
+          
         <input
           name="email"
           type="email"
@@ -48,7 +48,7 @@ const FormLogin = () => {
           }
           />
           </label>
-        <label>
+        <label >
 Password
         <input
           name="password"
