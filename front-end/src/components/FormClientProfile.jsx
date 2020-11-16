@@ -23,13 +23,6 @@ const FormClientProfile = () => {
     console.log('handleClick clicked');
     dispatch(userNameUpdate(user.name, userData.email)); //async
 
-
-    // UserService.userNameUpdate(user.name, userData.email)
-    //   .then(
-    //     (data) => console.log(data),
-    //     (error) => console.log(error.message),
-    //   );
-
   }
 
   // Each time user is updated name is checked if are valid 

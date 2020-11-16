@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import testImgBeer from '../images/testImgBeer.jpg';
+import testImgBeer from '../images/testImgBeer.jpg'; // Only for test => ToRemove
+import { saveToLocalStorage } from '../services/localStorage';
 
 import { addToCart, removeToCart } from '../store/ducks/productsCart';
 import './ProductsContainer.css'
@@ -44,6 +45,10 @@ const ProductsContainer = () => {
     totalCart()
   }, [cart])
 
+  const handleGoToCheckOut = () => {
+    saveToLocalStorage('cart', {cart });
+
+  }
   return (
     <>
       <div className="cardsContainer">
@@ -68,7 +73,7 @@ const ProductsContainer = () => {
       )
       )}
       </div>
-      <h1>Total R$: {total} </h1>
+      <button onClick={()=>handleGoToCheckOut()}>Ver Carrinho{total} </button>
 
     </>
   )

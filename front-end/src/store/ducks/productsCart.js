@@ -6,18 +6,13 @@ import { omit } from 'lodash';
 export const Types = {
   ADD_TO_CART: 'ADD_TO_CART',
   REMOVE_TO_CART: 'REMOVE_TO_CART',
+  LOAD_INIT_STATE: 'LOAD_INIT_STATE',
 };
 
 /** Reducers */
 
 const initialState = {
-  cart: {
-    2: {
-      name: 'Heineken 600ml',
-      price: 7.7,
-      quantity: 2,
-    },
-  },
+  cart: {},
 };
 
 const cartReducer = (state = initialState, { type, product }) => {
@@ -51,12 +46,10 @@ const cartReducer = (state = initialState, { type, product }) => {
       }
     case Types.REMOVE_TO_CART:
       if (state.cart[product.id].quantity === 1) {
-        console.log('=== 0');
-        delete state.cart[product.id];
         return {
           ...state,
-          cart: omit(state.cart, product.id)
-          };
+          cart: omit(state.cart, product.id),
+        };
       } else {
         const newQuantity = (state.cart[product.id].quantity -= 1); // Possible to use id?
         return {
@@ -70,6 +63,14 @@ const cartReducer = (state = initialState, { type, product }) => {
           },
         };
       }
+    case Types.LOAD_INIT_STATE:
+      console.log('Cart inside Reducer', product);
+      const cart = product;
+      console.log('cart', cart );
+        return {
+          ...state,
+          cart,
+        };
     default:
       return state;
   }
@@ -87,4 +88,8 @@ export const removeToCart = (product) => ({
   product,
 });
 
+export const loadInitCart = (product) => ({
+  type: Types.LOAD_INIT_STATE,
+  product,
+});
 export default cartReducer;

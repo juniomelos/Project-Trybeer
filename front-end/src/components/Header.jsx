@@ -11,7 +11,8 @@ const Header = (props) => {
   const location = useLocation();
   let headTitle = 'Trybeer';
   const title = {
-    "/profile": 'Meu Perfil'
+    "/profile": 'Meu Perfil',
+    "/checkout": 'Cliente - Checkout'
   }
   function handleClick() {
     dispatch(changeVisibility()); //async

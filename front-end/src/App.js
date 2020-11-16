@@ -11,6 +11,7 @@ import Login from './pages/Login/Login';
 import { login } from './store/ducks/user';
 import Register from './pages/Register/Register';
 import Products from './pages/Products/Products';
+import Checkout from './pages/Checkout/Checkout';
 import ClientProfile from './pages/ClientProfile/ClientProfile';
 import jwt_decode from 'jwt-decode';
 import './App.css';
@@ -43,6 +44,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/products" component={Products} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route
           exact
           path="/profile"

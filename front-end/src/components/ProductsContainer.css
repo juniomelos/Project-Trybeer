@@ -4,20 +4,20 @@
 }
 
 .productCard {
-  border: black solid 2px;
   border-radius: 3%;
-  margin: 10px;
-  padding: 2px 15px;
+  border: black solid 2px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 10px;
+  padding: 2px 15px;
 }
 
 .quantityContainer {
+  align-items: center;
   display: flex;
   height: 60px;
   justify-content: space-between;
-  align-items: center;
 }
 
 .quantity {
@@ -25,11 +25,11 @@
 }
 
 .productButton {
+  appearance: none;
   background-color: white;
   border-radius: 50%;
   font-size: 1em;
   padding: 0.5em 0.8em;
-  appearance: none;
 }
 
 .price{
