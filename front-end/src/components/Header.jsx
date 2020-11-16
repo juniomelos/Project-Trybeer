@@ -22,7 +22,7 @@ const Header = (props) => {
 
   const Wrapper = props.wrapper; //Imported Component
 
-  if (title[location.pathname] != undefined) headTitle = title[location.pathname];
+  if (title[location.pathname] !== undefined) headTitle = title[location.pathname];
   return (
     <div>
       <div className="headerContainer">
@@ -40,8 +40,7 @@ const Header = (props) => {
       <div className="sidebarwrapper">
         <div className="sidebar">{sideBarVisible && <SideBar />}</div>
         <div className="maincomponent">
-          <h1> Here is Product.js</h1>
-          <Wrapper />
+         { Wrapper!== undefined && <Wrapper />}
 
         </div>
       </div>
