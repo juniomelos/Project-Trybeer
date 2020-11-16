@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import testImgBeer from '../images/testImgBeer.jpg';
 
 import { addToCart, removeToCart } from '../store/ducks/productsCart';
-
+import './ProductsContainer.css'
 
 const ProductsContainer = () => {
   // Need to FETCH!!!
@@ -45,23 +46,29 @@ const ProductsContainer = () => {
 
   return (
     <>
-      <h1>Total: {total} </h1>
+      <div className="cardsContainer">
+
       {productList.map((product, index) => (
         cart[product.id] !== undefined ? quantity = cart[product.id].quantity : quantity = 0,
-        <div key={product.name}>
-
+        <div className="productCard" key={product.name}>
+          <span className="price">
+            R$ {product.price}
+          </span>
+          <img src={testImgBeer} alt="test" height="130px" />
           <h3 >
             {product.name}
           </h3>
-          <h2>
-           R$ {product.price}
-          </h2>
-          <button onClick={() => dispatch(addToCart(product))}>+</button>
-          <h2>{quantity}</h2>
-          <button disabled={quantity < 1} onClick={() => dispatch(removeToCart(product))}>-</button>
+          <div className="quantityContainer">
+
+            <button className="productButton" disabled={quantity < 1} onClick={() => dispatch(removeToCart(product))}>-</button>
+            <span className="quantity">{quantity}</span>
+            <button className="productButton" onClick={() => dispatch(addToCart(product))}>+</button>
+          </div>
         </div>
       )
       )}
+      </div>
+      <h1>Total R$: {total} </h1>
 
     </>
   )
