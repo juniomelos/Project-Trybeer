@@ -20,11 +20,10 @@ class UserService {
 
   handleError = (error) => {
     let errorMsg;
-
     switch (error.response.status) {
       case 500:
         errorMsg = {
-          error: { message: 'User not found or wrong password', code: 500 },
+          error: { message: 'E-mail already in database.', code: 500 },
         };
         break;
 
@@ -32,7 +31,7 @@ class UserService {
         break;
     }
 
-    throw new errorMsg();
+    throw errorMsg;
   };
 
   /** User login */
@@ -46,10 +45,10 @@ class UserService {
       email,
       name,
       password,
-      role: admin ? 'admin' : 'user',
+      role: admin ? 'administrator' : 'client',
     };
 
-    return this.http.post('/signup', body)
+    return this.http.post('/register', body)
   }
 
   async userNameUpdate(email, name) {

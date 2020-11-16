@@ -1,5 +1,5 @@
 require('dotenv').config();
-// const path = require('path');
+const path = require('path');
 
 const cors = require('cors');
 const express = require('express');
@@ -15,8 +15,7 @@ app.use('/login', route.loginRouter);
 app.use('/register', route.registerRouter);
 app.use('/products', route.productsRouter);
 app.use('/profile', route.profileRouter);
-
-// app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use((error, _req, res, _next) => {
   const { message, status } = error;
