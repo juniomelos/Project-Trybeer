@@ -17,10 +17,19 @@ const registerUsersCont = rescue(async (req, res, next) => {
 
   const newUser = await userServ.registerUsersServ(name, email, password, role);
 
-  return res.status(201).json(newUser);
+  return res.status(200).json(newUser);
+});
+
+const updateUsersNameCont = rescue(async (req, res) => {
+  const { name, email } = req.body;
+
+  const updateUser = await userServ.updateUserServ(name, email);
+
+  res.status(200).json(updateUser);
 });
 
 module.exports = {
   loginUsersCont,
   registerUsersCont,
+  updateUsersNameCont,
 };
