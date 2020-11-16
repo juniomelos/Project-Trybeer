@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import FormLogin from '../../components/FormLogin';
+import Header from '../../components/Header';
 import { saveToLocalStorage } from '../../services/localStorage';
 
 const Login = () => {
@@ -13,7 +14,7 @@ const Login = () => {
     if (isLoggedIn) {
       saveToLocalStorage('user', { token, ...userData });
 
-      userData.role === 'user'
+      userData.role === 'client'
         ? history.push('/products')
         : history.push('/admin/orders');
     }
@@ -21,6 +22,7 @@ const Login = () => {
 
   return (
     <div>
+      <Header></Header> 
       <FormLogin />
     </div>
   );

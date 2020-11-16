@@ -8,6 +8,7 @@ export const saveToLocalStorage = (key, entry) => {
 // need to add the case empty key
 export const loadFromLocalStorage = (key) => {
   if (key === 'user') return JSON.parse(localStorage.getItem(key));
+  if (key === 'cart') return JSON.parse(localStorage.getItem(key));
 
   return localStorage.getItem(key);
 };

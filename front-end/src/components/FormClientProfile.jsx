@@ -8,6 +8,7 @@ const FormClientProfile = () => {
 
   // Set all local Action/Reducers
   const userData = useSelector((state) => state.userReducer.user);
+
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
@@ -21,13 +22,6 @@ const FormClientProfile = () => {
   function handleClick() {
     console.log('handleClick clicked');
     dispatch(userNameUpdate(user.name, userData.email)); //async
-
-
-    // UserService.userNameUpdate(user.name, userData.email)
-    //   .then(
-    //     (data) => console.log(data),
-    //     (error) => console.log(error.message),
-    //   );
 
   }
 
@@ -51,8 +45,13 @@ const FormClientProfile = () => {
       <h2>
         Seu email  :
     </h2>
-      <h3 data-testid="profile-email-input"> {userData.email}</h3>
       <form className="formContainer">
+        <input name="name" type="text" data-testid="profile-email-input"
+          value={userData.email}
+          readonly
+        />
+
+
         <input name="name" type="text"
           data-testid="profile-name-input"
           placeholder="Digit seu nome"
@@ -62,7 +61,7 @@ const FormClientProfile = () => {
           }
         />
       </form>
-        <button data-testid="profile-save-btn" onClick={handleClick} disabled={inputsValid}>CADASTRAR</button>
+      <button data-testid="profile-save-btn" onClick={handleClick} disabled={inputsValid}>Salvar</button>
     </div>
   )
 }
