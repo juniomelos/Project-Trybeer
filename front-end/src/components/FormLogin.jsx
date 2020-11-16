@@ -32,9 +32,11 @@ const FormLogin = () => {
   }, [user]);
 
   return (
-    <div>
-      <h1>Here is FormLogin</h1>
+    <div className="globalContainer">
       <form className="formContainer">
+        <label>
+          Email
+          
         <input
           name="email"
           type="email"
@@ -44,7 +46,10 @@ const FormLogin = () => {
           onChange={(event) =>
             setUser({ ...user, [event.target.name]: event.target.value })
           }
-        />
+          />
+          </label>
+        <label >
+Password
         <input
           name="password"
           type="password"
@@ -54,7 +59,8 @@ const FormLogin = () => {
           onChange={(event) =>
             setUser({ ...user, [event.target.name]: event.target.value })
           }
-        />
+          />
+          </label>
         <button
           data-testid="signin-btn"
           type="button"
@@ -70,7 +76,7 @@ const FormLogin = () => {
           onClick={() => history.push('/register')}
         >
           {' '}
-          Ainda nao tenho conta
+          Ainda não tenho conta
         </button>
       </div>
     </div>

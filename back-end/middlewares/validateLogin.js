@@ -9,13 +9,8 @@ const validateLogin = (req, _res, next) => {
   const { email, password } = req.body;
   const { error } = schema.validate({ email, password });
 
-  // if (error) {
-  //   throw ('Login our password incorrects!')
-  //   // return res.status(500).json({ message: 'Login our password incorrects!' });
-  // }
-  console.log('req.body', req.body);
   if (error) throw error;
-  return next();
+  next();
 };
 
 module.exports = validateLogin;
