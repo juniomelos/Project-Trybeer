@@ -11,6 +11,8 @@ const Header = (props) => {
   const location = useLocation();
   let headTitle = 'Trybeer';
   const title = {
+    "/profile": 'Meu Perfil',
+    "/checkout": 'Cliente - Checkout'
   }
   function handleClick() {
     dispatch(changeVisibility()); //async
@@ -40,8 +42,7 @@ const Header = (props) => {
       <div className="sidebarwrapper">
         <div className="sidebar">{sideBarVisible && <SideBar />}</div>
         <div className="maincomponent">
-          <h1> Here is Product.js</h1>
-          <Wrapper />
+         { Wrapper!== undefined && <Wrapper />}
 
         </div>
       </div>
