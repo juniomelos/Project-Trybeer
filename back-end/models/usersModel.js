@@ -58,8 +58,25 @@ const getAllUsersMod = async (userEmail) => {
   }
 };
 
+const updateUsersNameMod = async (name, email) => {
+  try {
+    const db = await connection();
+    const usersDB = await db
+      .getTable('users')
+      .update()
+      .set('name', name)
+      .where('email = :email')
+      .bind('email', email)
+      .execute();
+    return usersDB;
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   getUserByEmailMod,
   registerUsersMod,
   getAllUsersMod,
+  updateUsersNameMod,
 };
