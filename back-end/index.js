@@ -4,7 +4,6 @@ require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const route = require('./routes');
-const controllers = require('./controllers');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -12,10 +11,9 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 
 app.use(cors());
-// console.log(route.loginRouter.loginRouter);
 app.use('/login', route.loginRouter);
 app.use('/register', route.registerRouter);
-app.get('/products', controllers.getAllProducts);
+app.use('/products', route.productsRouter);
 app.use('/profile', route.profileRouter);
 
 // app.use('/images', express.static(path.join(__dirname, 'images')));

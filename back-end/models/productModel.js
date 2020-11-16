@@ -15,7 +15,6 @@ const getAllProductMod = async () => {
       url_image,
     }));
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
