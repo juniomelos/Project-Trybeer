@@ -15,8 +15,8 @@ app.use(cors());
 // console.log(route.loginRouter.loginRouter);
 app.use('/login', route.loginRouter);
 app.use('/register', route.registerRouter);
-
 app.get('/products', controllers.getAllProducts);
+app.use('/profile', route.profileRouter);
 
 // app.use('/images', express.static(path.join(__dirname, 'images')));
 
@@ -25,7 +25,7 @@ app.use((error, _req, res, _next) => {
   if (status < 500) {
     return res.status(status).json(message);
   }
-  res.status(500).send('Broke: ' + message);
+  res.status(500).send(message);
 });
 
 app.listen(PORT, () => console.log(`Listening PORT ${PORT}`));

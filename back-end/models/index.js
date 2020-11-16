@@ -2,6 +2,7 @@ const {
   getUserByEmailMod,
   registerUsersMod,
   getAllUsersMod,
+  updateUsersNameMod,
 } = require('./usersModel');
 
 const { getAllProductMod } = require('./productModel');
@@ -11,4 +12,5 @@ module.exports = {
   registerUsersMod,
   getAllUsersMod,
   getAllProductMod,
+  updateUsersNameMod,
 };
