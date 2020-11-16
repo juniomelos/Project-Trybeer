@@ -5,7 +5,6 @@ import UserService from '../../services/trybeerAPI';
 /** Actions Types */
 
 export const Types = {
-  SIGNUP: 'SIGNUP',
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
   SIGNUP: 'SIGNUP',
@@ -32,13 +31,13 @@ const userReducer = (state = initialState, { type, payload }) => {
     case Types.LOGIN:
       return {
         ...state,
-        user: payload.userData,
+        user: payload.data,
         session: { isLoggedIn: true, token: payload.token },
       };
     case Types.LOGOUT:
       return { initialState };
     case Types.ERROR:
-      return { ...state, error: payload.error };
+      return { ...state, errors: [...state.errors, payload.error] };
     default:
       return state;
   }
@@ -46,11 +45,11 @@ const userReducer = (state = initialState, { type, payload }) => {
 
 /** Actions */
 
-export const login = ({ token, userData }) => ({
+export const login = ({ token, data }) => ({
   type: Types.LOGIN,
   payload: {
     token,
-    userData,
+    data,
   },
 });
 
@@ -67,11 +66,7 @@ export const hasErrored = (error) => ({
 
 export const userLogin = (email, password) => (dispatch) => {
   UserService.userLogin({ email, password })
-    .then((userLogin) => {
-      const { token, userData } = userLogin.data;
-
-      dispatch(login({ token, userData }));
-    })
+    .then((userLogin) => dispatch(login(userLogin.data)))
     .catch((error) => dispatch(hasErrored(error)));
 };
 
@@ -80,9 +75,8 @@ export const userSignup = (userData) => (dispatch) => {
     .then((response) => {
       /** Verifica se o recurso foi criado no BD e procede */
       /** Faz login se ok */
-      if (response.status === 201) {      
-        const { token, userData } = response.data;
-        dispatch(login({ token, userData }));
+      if (response.status === 201) {
+        dispatch(login(response.data));
       }
     })
     .catch((error) => dispatch(hasErrored(error)));

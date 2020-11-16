@@ -19,8 +19,7 @@ const FormRegister = () => {
   useEffect(() => {
     const regexEmail = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
     // const regexName = /\w[^0-9]{12}$/i;
-    const regexName = /^[a-zA-Z]{12}$/;
-    ;
+    const regexName = /^[a-zA-Z ]{12,}$/;
 
     if (
       user.password.length > 5 &&
@@ -91,7 +90,7 @@ const FormRegister = () => {
         </label>
         <button
           data-testid="signup-btn"
-          type="submit"
+          type="button"
           onClick={handleClick}
           disabled={inputsValid}
         >
