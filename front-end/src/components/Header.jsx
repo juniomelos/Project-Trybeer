@@ -9,10 +9,11 @@ import './Header.css';
 const Header = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  let headTitle = 'Trybeer';
+  let headTitle = 'TryBeer';
   const title = {
     "/profile": 'Meu Perfil',
-    "/checkout": 'Cliente - Checkout'
+    "/checkout": 'Cliente - Checkout',
+    "/checkout": 'Finalizar Pedido'
   }
   function handleClick() {
     dispatch(changeVisibility()); //async
