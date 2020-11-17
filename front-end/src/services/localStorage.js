@@ -14,6 +14,7 @@ export const loadFromLocalStorage = (key) => {
 };
 
 export const deleteFromLocalStorage = (key) => {
+  console.log('localstorage', key);
   localStorage.removeItem(key);
 };
 

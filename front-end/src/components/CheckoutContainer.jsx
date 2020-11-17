@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadFromLocalStorage } from '../services/localStorage';
 import { loadInitCart } from '../store/ducks/productsCart';
 import CheckoutCards from './CheckoutCards';
+import CheckoutForm from './CheckoutForm';
 
 const CheckoutContainer = () => {
   const dispatch = useDispatch();
@@ -22,26 +23,32 @@ const CheckoutContainer = () => {
   const totalCart = () => {
     let totalSummed = 0;
     Object.keys(cart).map(function (key) {
-      if (cart[key].quantity > 0) {
-        totalSummed += cart[key].price * cart[key].quantity;
-      }
-      setTotal(totalSummed);
+      totalSummed += cart[key].price * cart[key].quantity;
     });
+    setTotal(totalSummed);
 
   }
   const [total, setTotal] = useState(
     0
   );
+
+  const [address, setAddress] = useState({
+    street: '',
+    number: '',
+  });
+
   useEffect(() => {
     totalCart()
   }, [cart])
 
-
   return (<div>
-<CheckoutCards />
-<h2>
-Total: {total} 
-</h2>
+    <CheckoutCards />
+    <div className="form">
+    </div>
+    <h2 data-testid="order-total-value">
+      {Math.round(total * 100) / 100}
+    </h2>
+    <CheckoutForm total={total} />
   </div>
   )
 }

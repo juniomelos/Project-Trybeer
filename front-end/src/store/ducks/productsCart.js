@@ -65,6 +65,7 @@ const cartReducer = (state = initialState, { type, product }) => {
         };
       }
     case Types.LOAD_INIT_STATE:
+      console.log('LOAD_INIT_STATE');
       const cart = product;
       return {
         ...state,

@@ -14,15 +14,12 @@ const FormClientProfile = () => {
   const [user, setUser] = useState({
     name: userData.name,
   });
-
   const [inputsValid, setInputsValid] = useState(
     true,
   );
 
   function handleClick() {
-    console.log('handleClick clicked');
     dispatch(userNameUpdate(user.name, userData.email)); //async
-
   }
 
   // Each time user is updated name is checked if are valid 
@@ -38,20 +35,11 @@ const FormClientProfile = () => {
 
   return (
     <div>
-
-      <h1>
-        Here is FormClientProfile
-    </h1>
-      <h2>
-        Seu email  :
-    </h2>
       <form className="formContainer">
         <input name="name" type="text" data-testid="profile-email-input"
           value={userData.email}
           readonly
         />
-
-
         <input name="name" type="text"
           data-testid="profile-name-input"
           placeholder="Digit seu nome"

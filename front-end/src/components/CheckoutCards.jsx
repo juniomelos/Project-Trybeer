@@ -10,66 +10,28 @@ const CheckoutCards = () => {
     (state) => state.cartReducer.cart,
   );
 
-  const [address, setAddress] = useState({
-    street: '',
-    number: '',
-  });
-
   return (
     <div>
-
-
+      {Object.keys(cart).length === 0 && <h1>Não há produtos no carrinho</h1>}
       {Object.keys(cart).map((keyName, i) => (
-        <div className="card">
-          <h3>
+        <div key={cart[keyName].name} className="card">
+          <h3 data-testid={`${i}-product-qtd-input`} >
             {cart[keyName].quantity}
           </h3>
-          <h3>
+          <h3 data-testid={`${i}-product-name`} >
             {cart[keyName].name}
           </h3>
-          <h3>
+          <h3 data-testid={`${i}-product-total-value`}>
             R$: {cart[keyName].price * cart[keyName].quantity}
           </h3>
-          <h4>
+          <h4 data-testid={`${i}-product-unit-price`}>
             Preco unitario R$: {cart[keyName].price}
-          </h4>
-          <button onClick={() => dispatch(removeProduct('2'))} >X</button>
+          </h4 >
+          <button data-testid={`${i}-removal-button`} onClick={() => dispatch(removeProduct([keyName]))} >X</button>
         </div>
-      ))}
-
-      <div className="form">
-        <form>
-          <h3>Endereço</h3>
-          <label>
-            Rua:
-        <input
-              name="street"
-              type="text"
-              data-testid="checkout-street-input"
-              placeholder="Digit seu rua"
-              value={address.street}
-              onChange={(event) =>
-                setAddress({ ...address, [event.target.name]: event.target.value })
-              }
-            />
-          </label>
-          <label>
-          Número da casa:
-        <input
-              name="number"
-              type="text"
-              data-testid="checkout-house-number-input"
-              placeholder="Digit seu rua"
-              value={address.number}
-              onChange={(event) =>
-                setAddress({ ...address, [event.target.name]: event.target.value })
-              }
-            />
-          </label>
-        </form>
-      </div>
-
-    </div>
+      ))
+      }
+    </div >
   )
 }
 export default CheckoutCards;

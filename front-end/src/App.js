@@ -21,7 +21,9 @@ function App() {
 
   const requireAuth = () => {
     const userData = loadFromLocalStorage('user');
+    console.log('requireAuth', userData.name);
     if (userData != null) {
+      console.log('userData inside if', userData);
       const decoded = jwt_decode(userData.token);
       const now = Date.now().valueOf() / 1000; //inspiration from web Stackflow
       if (typeof decoded.exp !== 'undefined' && decoded.exp > now) {
@@ -30,7 +32,7 @@ function App() {
           email: userData.email,
           role: userData.role,
         };
-        dispatch(login({ token: userData.token, user }));
+        dispatch(login({ token: userData.token, data: user }));
         return true;
       }
     }
@@ -40,10 +42,16 @@ function App() {
   return (
     <Router>
       <Switch>
-      <Route exact path="/" component={Login} />
+        <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/products" component={Products} />
+        <Route
+          exact
+          path="/products"
+          render={() =>
+            requireAuth() ? <Products /> : <Redirect to="/login" />
+          }
+        />
         <Route exact path="/checkout" component={Checkout} />
         <Route
           exact

@@ -5,7 +5,10 @@ import './style.css';
 
 const Products = () => {
   return (
-      <Header wrapper={ProductsContainer} /> //wrapper = component name to render
+    <>
+      <Header />
+      <ProductsContainer />
+    </>
   );
 };
 
