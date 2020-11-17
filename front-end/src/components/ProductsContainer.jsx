@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import testImgBeer from '../images/testImgBeer.jpg'; // Only for test => ToRemove
 import { saveToLocalStorage } from '../services/localStorage';
 import { addToCart, removeToCart } from '../store/ducks/productsCart';
+import { getProducts } from '../store/ducks/products';
 import { useHistory } from 'react-router-dom';
 import './ProductsContainer.css'
 
@@ -47,6 +48,11 @@ const ProductsContainer = () => {
   useEffect(() => {
     totalCart()
   }, [cart])
+
+  useEffect(() => {
+    console.log('Useeffect getproducts');
+    dispatch(getProducts())
+  }, [])
 
   const handleGoToCheckOut = () => {
     saveToLocalStorage('cart', {cart });
