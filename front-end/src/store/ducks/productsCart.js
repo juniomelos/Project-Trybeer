@@ -1,4 +1,5 @@
 import { omit } from 'lodash';
+
 /** sideBarHide REDUX */
 
 /** Actions Types */
@@ -71,11 +72,11 @@ const cartReducer = (state = initialState, { type, product }) => {
         ...state,
         cart,
       };
-      case Types.REMOVE_PRODUCT:
-        return {
-          ...state,
-          cart: omit(state.cart, product),
-        };
+    case Types.REMOVE_PRODUCT:
+      return {
+        ...state,
+        cart: omit(state.cart, product),
+      };
     default:
       return state;
   }
