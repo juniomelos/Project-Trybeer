@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import testImgBeer from '../images/testImgBeer.jpg'; // Only for test => ToRemove
 import { saveToLocalStorage } from '../services/localStorage';
-
 import { addToCart, removeToCart } from '../store/ducks/productsCart';
+import { useHistory } from 'react-router-dom';
 import './ProductsContainer.css'
 
 const ProductsContainer = () => {
+  const history = useHistory();
+
   // Need to FETCH!!!
   const productList = [{
     id: 1,
@@ -22,6 +24,7 @@ const ProductsContainer = () => {
   },
   ]
   // *****
+
   let quantity = 0;
   const dispatch = useDispatch();
   const cart = useSelector(
@@ -47,6 +50,7 @@ const ProductsContainer = () => {
 
   const handleGoToCheckOut = () => {
     saveToLocalStorage('cart', {cart });
+    history.push('/checkout')
 
   }
   return (
