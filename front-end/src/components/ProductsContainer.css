@@ -1,6 +1,6 @@
 .cardsContainer {
   display: flex;
-
+  flex-wrap: wrap;
 }
 
 .productCard {
@@ -32,6 +32,6 @@
   padding: 0.5em 0.8em;
 }
 
-.price{
+.price {
   font-size: 1.5em;
 }

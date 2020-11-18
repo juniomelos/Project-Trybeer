@@ -20,14 +20,20 @@ const CheckoutForm = (props) => {
 
   const [messageCheckOk, setMessageCheckOk] = useState(false);
 
+function goToProducts() {
+
+  history.push('/products');
+
+}
+
+
   const handleClick = () => {
     // message ok or nok
     setMessageCheckOk(true)
     // Clear cart
     dispatch(loadInitCart({}))
     deleteFromLocalStorage('cart');
-
-    history.push('/products')
+    setTimeout(goToProducts, 1000)
   };
 
   return (
@@ -71,3 +77,5 @@ const CheckoutForm = (props) => {
   )
 }
 export default CheckoutForm;
+
+

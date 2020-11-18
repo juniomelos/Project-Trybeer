@@ -22,10 +22,10 @@ const CheckoutCards = () => {
             {cart[keyName].name}
           </h3>
           <h3 data-testid={`${i}-product-total-value`}>
-            R$: {cart[keyName].price * cart[keyName].quantity}
+            R$ {(cart[keyName].price * cart[keyName].quantity).toFixed(2).toString().replace('.', ',')}
           </h3>
           <h4 data-testid={`${i}-product-unit-price`}>
-            Preco unitario R$: {cart[keyName].price}
+            (R$ {cart[keyName].price.toFixed(2).toString().replace('.', ',')} un)
           </h4 >
           <button data-testid={`${i}-removal-button`} onClick={() => dispatch(removeProduct([keyName]))} >X</button>
         </div>
