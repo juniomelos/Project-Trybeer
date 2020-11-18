@@ -15,13 +15,15 @@ import Checkout from './pages/Checkout/Checkout';
 import ClientProfile from './pages/ClientProfile/ClientProfile';
 import jwt_decode from 'jwt-decode';
 import './App.css';
+import AdminProfile from './pages/AdminProfile';
+import Orders from './pages/Orders';
 
 function App() {
   const dispatch = useDispatch();
 
   const requireAuth = () => {
     const userData = loadFromLocalStorage('user');
-    console.log('requireAuth', userData.name);
+
     if (userData != null) {
       console.log('userData inside if', userData);
       const decoded = jwt_decode(userData.token);
@@ -58,6 +60,20 @@ function App() {
           path="/profile"
           render={() =>
             requireAuth() ? <ClientProfile /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          exact
+          path="/admin/orders"
+          render={() =>
+            requireAuth() ? <Orders /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          exact
+          path="/admin/profile"
+          render={() =>
+            requireAuth() ? <AdminProfile /> : <Redirect to="/login" />
           }
         />
       </Switch>
