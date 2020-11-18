@@ -6,13 +6,14 @@ import UserService from '../../services/trybeerAPI';
 /** Actions Types */
 
 export const Types = {
-  ADD_PRODUCTS: 'ADADD_PRODUCTSD_TO_CART',
+  ADD_PRODUCTS: 'ADD_PRODUCTS',
 };
 
 /** Reducers */
 
 const initialState = {
-  products: {},
+  productsDB: {},
+  productsFetching: false
 };
 
 const productsReducer = (state = initialState, { type, products }) => {
@@ -20,7 +21,8 @@ const productsReducer = (state = initialState, { type, products }) => {
     case Types.ADD_PRODUCTS:
       return {
         ...state,
-        products,
+        productsDB: products,
+        productsFetching: true
       };
     default:
       return state;
@@ -42,13 +44,10 @@ export const hasErrored = (error) => ({
 /** Actions Creators */
 
 export const getProducts = () => (dispatch) => {
-  console.log("inside getProducts");
   UserService.getProducts()
     .then((res) => {
-     console.log('Products', res); 
-      dispatch(addProducts(res.data))
-    }
-      )
+      dispatch(addProducts(res.data));
+    })
     .catch((error) => dispatch(hasErrored(error)));
 };
 

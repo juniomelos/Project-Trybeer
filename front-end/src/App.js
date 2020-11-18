@@ -21,7 +21,6 @@ function App() {
 
   const requireAuth = () => {
     const userData = loadFromLocalStorage('user');
-    console.log('requireAuth', userData.name);
     if (userData != null) {
       console.log('userData inside if', userData);
       const decoded = jwt_decode(userData.token);
@@ -52,7 +51,11 @@ function App() {
             requireAuth() ? <Products /> : <Redirect to="/login" />
           }
         />
-        <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/checkout" 
+                render={() =>
+                  requireAuth() ? <Checkout /> : <Redirect to="/login" />
+                }
+        />
         <Route
           exact
           path="/profile"
