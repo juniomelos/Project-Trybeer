@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { deleteFromLocalStorage, loadFromLocalStorage } from '../services/localStorage';
 import { useHistory, Redirect } from 'react-router-dom';
-import { useDispatch, } from 'react-redux';
+import { useDispatch, useSelector, } from 'react-redux';
 import { logout } from '../store/ducks/user';
 
 import { Link } from 'react-router-dom';
@@ -12,29 +12,18 @@ const SideBar = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   // Set all local Action/Reducers
-  const [navigate, setNavigate] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.userReducer.session);
 
-  function handleClick(e) {
-    e.preventDefault();
-    console.log("handleClick sidebar");
-    dispatch(logout()); //async
+  const handleClick = () => {
     deleteFromLocalStorage('user');
-    setNavigate(true);
-    setTimeout(function(){ 
-      // history.push('/login')
-    }, 1000);
+    dispatch(logout());
   }
 
-  if (navigate) {
-    return (
-
-
-      <Redirect to="/login" push={false}  />
-
-    )
-
-  }
-
+  useEffect(() => {
+    if (!isLoggedIn) {
+      history.push('/login');
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="side-menu-container">

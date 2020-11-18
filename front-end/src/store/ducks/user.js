@@ -35,7 +35,7 @@ const userReducer = (state = initialState, { type, payload }) => {
         session: { isLoggedIn: true, token: payload.token },
       };
     case Types.LOGOUT:
-      return { initialState };
+      return { ...initialState };
     case Types.ERROR:
       return { ...state, errors: [...state.errors, payload.error] };
     default:
