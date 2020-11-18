@@ -75,7 +75,7 @@ export const userSignup = (userData) => (dispatch) => {
     .then((response) => {
       /** Verifica se o recurso foi criado no BD e procede */
       /** Faz login se ok */
-      if (response.status === 201) {
+      if (response.status === 200) {
         dispatch(login(response.data));
       }
     })

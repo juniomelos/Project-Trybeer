@@ -51,15 +51,10 @@ const SideBar = ({ userType }) => {
   const { role } = useSelector((state) => state.userReducer.user);
 
   const handleClick = () => {
-    deleteFromLocalStorage('user');
     dispatch(logout());
+    deleteFromLocalStorage('user');
+    history.push('/login');
   };
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      history.push('/login');
-    }
-  }, [isLoggedIn]);
 
   return (
     <div

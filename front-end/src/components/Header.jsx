@@ -40,7 +40,7 @@ const Header = (props) => {
       </div>
       <div className="sidebarwrapper">
         <div className="sidebar">
-          {sideBarVisible || (role === 'administrator' && <SideBar />)}
+          {(sideBarVisible || role === 'administrator') && <SideBar />}
         </div>
         <div className="maincomponent">
           {Wrapper !== undefined && <Wrapper />}
