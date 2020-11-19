@@ -65,13 +65,8 @@ class UserService {
   /** Get all products */
   getProducts = async () => this.http.get('/products');
 
-
   /** Post one order */
-  postOrder = async () => this.http.post('/orders');
-
-
-
-
+  postOrder = async () => this.http.post('/orders', {});
 }
 
 export default new UserService();
