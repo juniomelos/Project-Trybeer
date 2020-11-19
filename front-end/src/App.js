@@ -12,6 +12,7 @@ import { login } from './store/ducks/user';
 import Register from './pages/Register/Register';
 import Products from './pages/Products/Products';
 import Checkout from './pages/Checkout/Checkout';
+import ClientOrders from './pages/ClientOrders/ClientOrders';
 import ClientProfile from './pages/ClientProfile/ClientProfile';
 import jwt_decode from 'jwt-decode';
 import './App.css';
@@ -22,7 +23,6 @@ function App() {
   const requireAuth = () => {
     const userData = loadFromLocalStorage('user');
     if (userData != null) {
-      console.log('userData inside if', userData);
       const decoded = jwt_decode(userData.token);
       const now = Date.now().valueOf() / 1000; //inspiration from web Stackflow
       if (typeof decoded.exp !== 'undefined' && decoded.exp > now) {
@@ -44,6 +44,7 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/orders" component={ClientOrders} />
         <Route
           exact
           path="/products"

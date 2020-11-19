@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadInitCart } from '../store/ducks/productsCart';
+import { postOrder } from '../store/ducks/orders';
 import { useHistory } from 'react-router-dom';
 import { deleteFromLocalStorage } from '../services/localStorage';
 
@@ -28,10 +29,9 @@ function goToProducts() {
 
 
   const handleClick = () => {
-    // message ok or nok
     setMessageCheckOk(true)
-    // Clear cart
     dispatch(loadInitCart({}))
+    dispatch(postOrder(cart));
     deleteFromLocalStorage('cart');
     setTimeout(goToProducts, 1000)
   };
