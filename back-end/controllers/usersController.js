@@ -1,6 +1,6 @@
 const rescue = require('express-rescue');
 const userServ = require('../services');
-const userModel = require('../models');
+const { usersModel } = require('../models');
 
 const loginUsersCont = rescue(async (req, res) => {
   const { email, password } = req.body;
@@ -12,7 +12,7 @@ const loginUsersCont = rescue(async (req, res) => {
 const registerUsersCont = rescue(async (req, res, next) => {
   const { name, email, password, role } = req.body;
 
-  const { id } = await userModel.getUserByEmailMod(email);
+  const { id } = await usersModel.getUserByEmailMod(email);
   if (id) throw new Error('E-mail already exist.');
 
   const newUser = await userServ.registerUsersServ(name, email, password, role);
