@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const updateCont = require('../controllers');
+const { usersController } = require('../controllers');
 const middleware = require('../middlewares');
 
 const profileRouter = Router();
 
-profileRouter.put('/', middleware.validateUpdate, updateCont.updateUsersNameCont);
+profileRouter.put('/', middleware.validateUpdate, usersController.updateUsersNameCont);
 
 module.exports = { profileRouter };

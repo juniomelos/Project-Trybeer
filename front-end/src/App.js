@@ -16,12 +16,15 @@ import ClientOrders from './pages/ClientOrders/ClientOrders';
 import ClientProfile from './pages/ClientProfile/ClientProfile';
 import jwt_decode from 'jwt-decode';
 import './App.css';
+import AdminProfile from './pages/AdminProfile';
+import Orders from './pages/Orders';
 
 function App() {
   const dispatch = useDispatch();
 
   const requireAuth = () => {
     const userData = loadFromLocalStorage('user');
+
     if (userData != null) {
       const decoded = jwt_decode(userData.token);
       const now = Date.now().valueOf() / 1000; //inspiration from web Stackflow
@@ -62,6 +65,20 @@ function App() {
           path="/profile"
           render={() =>
             requireAuth() ? <ClientProfile /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          exact
+          path="/admin/orders"
+          render={() =>
+            requireAuth() ? <Orders /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          exact
+          path="/admin/profile"
+          render={() =>
+            requireAuth() ? <AdminProfile /> : <Redirect to="/login" />
           }
         />
       </Switch>

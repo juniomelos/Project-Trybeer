@@ -48,6 +48,7 @@ class UserService {
       role: admin ? 'administrator' : 'client',
     };
 
+
     return this.http.post('/register', body);
   };
   /** User Name Update */

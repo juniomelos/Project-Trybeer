@@ -45,6 +45,7 @@ const ProductsContainer = () => {
   }, [cart])
 
   useEffect(() => {
+
     dispatch(getProducts())
     const cartFromLocalStorage = loadFromLocalStorage('cart')
     if (cartFromLocalStorage !== null) dispatch(loadInitCart(cartFromLocalStorage.cart))
@@ -54,7 +55,6 @@ const ProductsContainer = () => {
   const { productsDB, productsFetching } = useSelector(
     (state) => state.productsReducer,
   );
-
   const handleGoToCheckOut = () => {
     saveToLocalStorage('cart', { cart });
     history.push('/checkout')
