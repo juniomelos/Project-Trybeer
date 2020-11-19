@@ -9,6 +9,8 @@ const allSales = rescue(async (_req, res) => {
 });
 
 const finishSales = rescue(async (req, res) => {
+  // const finishSales = (async (req, res) => {
+  // console.log("here is finishSales, body:", req);
   const { email, total, address, number, date, products } = req.body;
 
   const newSale = await salesServices.finishSalesServ(email, total, address, number, date);

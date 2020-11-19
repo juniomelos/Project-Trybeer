@@ -14,6 +14,10 @@ const CheckoutForm = (props) => {
     (state) => state.cartReducer.cart,
   );
 
+  const { user, session } = useSelector(
+    (state) => state.userReducer,
+  );
+
   const [address, setAddress] = useState({
     street: '',
     number: '',
@@ -21,17 +25,19 @@ const CheckoutForm = (props) => {
 
   const [messageCheckOk, setMessageCheckOk] = useState(false);
 
-function goToProducts() {
+  function goToProducts() {
 
-  history.push('/products');
+    history.push('/products');
 
-}
+  }
 
 
   const handleClick = () => {
     setMessageCheckOk(true)
     dispatch(loadInitCart({}))
-    dispatch(postOrder(cart));
+    console.log("type of total:", typeof props.total);
+    dispatch(postOrder(cart, user.email,
+      props.total, address.street, address.number, session.token));
     deleteFromLocalStorage('cart');
     setTimeout(goToProducts, 1000)
   };

@@ -3,7 +3,7 @@ const joi = require('joi');
 const schema = {
   finishSales: joi.object({
     email: joi.string().email().required(),
-    total: joi.string().required(),
+    total: joi.number().required(),
     address: joi.string().min(3).max(100).required(),
     number: joi.number().required(),
   }),

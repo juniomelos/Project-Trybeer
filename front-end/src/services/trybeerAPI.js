@@ -19,6 +19,7 @@ class UserService {
   };
 
   handleError = (error) => {
+    console.log('inside handleError', error, error.response);
     let errorMsg;
     switch (error.response.status) {
       case 500:
@@ -26,8 +27,14 @@ class UserService {
           error: { message: 'E-mail already in database.', code: 500 },
         };
         break;
-
       default:
+        errorMsg = {
+          error: {
+            message: error.response.statusText,
+            code: error.response.status,
+          },
+        };
+
         break;
     }
 
@@ -48,7 +55,6 @@ class UserService {
       role: admin ? 'administrator' : 'client',
     };
 
-
     return this.http.post('/register', body);
   };
   /** User Name Update */
@@ -67,7 +73,23 @@ class UserService {
   getProducts = async () => this.http.get('/products');
 
   /** Post one order */
-  postOrder = async () => this.http.post('/orders', {});
+  postOrder = async (payload, token) => {
+    return this.http.post(
+      '/sales',
+
+      {
+        ...payload,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+      {
+        body: {},
+      },
+    );
+  };
 }
 
 export default new UserService();
