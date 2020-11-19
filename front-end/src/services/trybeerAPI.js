@@ -14,9 +14,9 @@ class UserService {
     this.http.interceptors.response.use(this.handleSuccess, this.handleError);
   }
 
-  handleSuccess = (response) => {
+  handleSuccess(response) {
     return response;
-  };
+  }
 
   handleError = (error) => {
     let errorMsg;
@@ -48,7 +48,6 @@ class UserService {
       role: admin ? 'administrator' : 'client',
     };
 
-
     return this.http.post('/register', body);
   };
   /** User Name Update */
@@ -65,7 +64,6 @@ class UserService {
 
   /** Get all products */
   getProducts = async () => this.http.get('/products');
-
 }
 
 export default new UserService();

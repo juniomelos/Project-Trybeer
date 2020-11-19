@@ -4,14 +4,11 @@ import { loadInitCart } from '../store/ducks/productsCart';
 import { useHistory } from 'react-router-dom';
 import { deleteFromLocalStorage } from '../services/localStorage';
 
-
 const CheckoutForm = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const cart = useSelector(
-    (state) => state.cartReducer.cart,
-  );
+  const cart = useSelector((state) => state.cartReducer.cart);
 
   const [address, setAddress] = useState({
     street: '',
@@ -20,20 +17,17 @@ const CheckoutForm = (props) => {
 
   const [messageCheckOk, setMessageCheckOk] = useState(false);
 
-function goToProducts() {
-
-  history.push('/products');
-
-}
-
+  function goToProducts() {
+    history.push('/products');
+  }
 
   const handleClick = () => {
     // message ok or nok
-    setMessageCheckOk(true)
+    setMessageCheckOk(true);
     // Clear cart
-    dispatch(loadInitCart({}))
+    dispatch(loadInitCart({}));
     deleteFromLocalStorage('cart');
-    setTimeout(goToProducts, 1000)
+    setTimeout(goToProducts, 1000);
   };
 
   return (
@@ -43,7 +37,7 @@ function goToProducts() {
           <h3>Endereço</h3>
           <label>
             Rua:
-        <input
+            <input
               name="street"
               type="text"
               data-testid="checkout-street-input"
@@ -56,7 +50,7 @@ function goToProducts() {
           </label>
           <label>
             Número da casa:
-        <input
+            <input
               name="number"
               type="number"
               data-testid="checkout-house-number-input"
@@ -69,13 +63,15 @@ function goToProducts() {
           </label>
         </form>
       </div>
-      <button data-testid="checkout-finish-btn" onClick={handleClick}
+      <button
+        data-testid="checkout-finish-btn"
+        onClick={handleClick}
         disabled={!props.total > 0 || address.street.length < 1 || address.number.length < 1}
-      >Finalizar Pedido </button>
+      >
+        Finalizar Pedido{' '}
+      </button>
       {messageCheckOk && <h2>Compra realizada com sucesso!</h2>}
     </div>
-  )
-}
+  );
+};
 export default CheckoutForm;
-
-

@@ -19,15 +19,12 @@ const Header = (props) => {
     dispatch(changeVisibility()); //async
   }
 
-  const sideBarVisible = useSelector(
-    (state) => state.sideBarHideReducer.isVisible
-  );
+  const sideBarVisible = useSelector((state) => state.sideBarHideReducer.isVisible);
   const { role } = useSelector((state) => state.userReducer.user);
 
   const Wrapper = props.wrapper; //Imported Component
 
-  if (title[location.pathname] !== undefined)
-    headTitle = title[location.pathname];
+  if (title[location.pathname] !== undefined) headTitle = title[location.pathname];
   return (
     <div>
       <div className="headerContainer">
@@ -39,12 +36,8 @@ const Header = (props) => {
         </div>
       </div>
       <div className="sidebarwrapper">
-        <div className="sidebar">
-          {(sideBarVisible || role === 'administrator') && <SideBar />}
-        </div>
-        <div className="maincomponent">
-          {Wrapper !== undefined && <Wrapper />}
-        </div>
+        <div className="sidebar">{(sideBarVisible || role === 'administrator') && <SideBar />}</div>
+        <div className="maincomponent">{Wrapper !== undefined && <Wrapper />}</div>
       </div>
     </div>
   );

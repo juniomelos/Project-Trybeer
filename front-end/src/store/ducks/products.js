@@ -1,4 +1,4 @@
-import { omit } from 'lodash';
+// import { omit } from 'lodash';
 import UserService from '../../services/trybeerAPI';
 
 /** sideBarHide REDUX */
@@ -13,7 +13,7 @@ export const Types = {
 
 const initialState = {
   productsDB: {},
-  productsFetching: false
+  productsFetching: false,
 };
 
 const productsReducer = (state = initialState, { type, products }) => {
@@ -22,7 +22,7 @@ const productsReducer = (state = initialState, { type, products }) => {
       return {
         ...state,
         productsDB: products,
-        productsFetching: true
+        productsFetching: true,
       };
     default:
       return state;

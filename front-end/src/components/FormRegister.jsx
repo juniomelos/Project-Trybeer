@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { userSignup } from '../store/ducks/user';
 import { useHistory, Redirect } from 'react-router-dom';
 
-
 const FormRegister = () => {
   const history = useHistory();
 
@@ -24,11 +23,7 @@ const FormRegister = () => {
     const regexEmail = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
     const regexName = /^[a-zA-Z ]{12,}$/;
 
-    if (
-      user.password.length > 5 &&
-      regexEmail.test(user.email) &&
-      regexName.test(user.name)
-    ) {
+    if (user.password.length > 5 && regexEmail.test(user.email) && regexName.test(user.name)) {
       setInputsValid(false);
     } else {
       setInputsValid(true);
@@ -36,11 +31,10 @@ const FormRegister = () => {
   }, [user]);
 
   const handleClick = () => {
-
     dispatch(userSignup(user));
 
-    history.push('/products')
-  }
+    history.push('/products');
+  };
   // const handleClick = () => dispatch(userSignup(user))
 
   return (
@@ -48,41 +42,35 @@ const FormRegister = () => {
       <form className="formContainer">
         <label>
           Nome
-        <input
+          <input
             name="name"
             type="text"
             data-testid="signup-name"
             placeholder="Digit seu nome"
             value={user.name}
-            onChange={(event) =>
-              setUser({ ...user, [event.target.name]: event.target.value })
-            }
+            onChange={(event) => setUser({ ...user, [event.target.name]: event.target.value })}
           />
         </label>
         <label>
           Email
-        <input
+          <input
             name="email"
             type="email"
             data-testid="signup-email"
             placeholder="Digit seu email"
             value={user.email}
-            onChange={(event) =>
-              setUser({ ...user, [event.target.name]: event.target.value })
-            }
+            onChange={(event) => setUser({ ...user, [event.target.name]: event.target.value })}
           />
         </label>
         <label>
           Password
-        <input
+          <input
             name="password"
             type="password"
             data-testid="signup-password"
             placeholder="Digit seu password"
             value={user.password}
-            onChange={(event) =>
-              setUser({ ...user, [event.target.name]: event.target.value })
-            }
+            onChange={(event) => setUser({ ...user, [event.target.name]: event.target.value })}
           />
         </label>
         <label>
@@ -92,17 +80,10 @@ const FormRegister = () => {
             name="admin"
             type="checkbox"
             checked={user.admin}
-            onChange={(event) =>
-              setUser({ ...user, [event.target.name]: !user.admin })
-            }
+            onChange={(event) => setUser({ ...user, [event.target.name]: !user.admin })}
           />
         </label>
-        <button
-          data-testid="signup-btn"
-          type="button"
-          onClick={handleClick}
-          disabled={inputsValid}
-        >
+        <button data-testid="signup-btn" type="button" onClick={handleClick} disabled={inputsValid}>
           Cadastrar
         </button>
       </form>
