@@ -16,6 +16,7 @@ app.use('/register', route.registerRouter);
 app.use('/products', route.productsRouter);
 app.use('/profile', route.profileRouter);
 app.use('/sales', route.salesRouter);
+app.use('/admin', route.adminRouter);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use((error, _req, res, _next) => {

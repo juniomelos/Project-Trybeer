@@ -3,6 +3,7 @@ const { userLoginServ } = require('./loginServices');
 const { registerUsersServ } = require('./registerServices');
 const { updateUserServ } = require('./updateServices');
 const salesServices = require('./salesServices');
+const secret = require('./secret');
 
 module.exports = {
   createToken,
@@ -10,4 +11,5 @@ module.exports = {
   registerUsersServ,
   updateUserServ,
   salesServices,
+  secret,
 };
