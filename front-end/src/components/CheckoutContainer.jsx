@@ -17,7 +17,9 @@ const CheckoutContainer = () => {
   //Each loading cart is load from localstorage
   useEffect(() => {
     const localStoreCart = loadFromLocalStorage('cart')
-    dispatch(loadInitCart(localStoreCart.cart));
+    if (localStoreCart !== null) dispatch(loadInitCart(localStoreCart.cart))
+    
+    // dispatch(loadInitCart(localStoreCart.cart));
   }, [])
 
   const totalCart = () => {
@@ -46,7 +48,7 @@ const CheckoutContainer = () => {
     <div className="form">
     </div>
     <h2 data-testid="order-total-value">
-      {Math.round(total * 100) / 100}
+      R$ {total.toFixed(2).toString().replace('.', ',')}
     </h2>
     <CheckoutForm total={total} />
   </div>

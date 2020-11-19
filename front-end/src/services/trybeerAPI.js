@@ -48,8 +48,10 @@ class UserService {
       role: admin ? 'administrator' : 'client',
     };
 
-    return this.http.post('/register', body)
-  }
+
+    return this.http.post('/register', body);
+  };
+  /** User Name Update */
 
   async userNameUpdate(email, name) {
     console.log('inside trybeerAPI userNameUpdate');
@@ -60,6 +62,10 @@ class UserService {
 
     return this.http.put('/', { body });
   }
+
+  /** Get all products */
+  getProducts = async () => this.http.get('/products');
+
 }
 
 export default new UserService();

@@ -1,4 +1,5 @@
 import { omit } from 'lodash';
+
 /** sideBarHide REDUX */
 
 /** Actions Types */
@@ -46,36 +47,41 @@ const cartReducer = (state = initialState, { type, product }) => {
         };
       }
     case Types.REMOVE_TO_CART:
-      if (state.cart[product.id].quantity === 1) {
-        return {
-          ...state,
-          cart: omit(state.cart, product.id),
-        };
-      } else {
-        const newQuantity = (state.cart[product.id].quantity -= 1); // Possible to use id?
-        return {
-          ...state,
-          cart: {
-            ...state.cart,
-            [product.id]: {
-              ...state.cart[product.id],
-              quantity: newQuantity,
+      if (state.cart[product.id] !== undefined) {
+        if (state.cart[product.id].quantity === 1) {
+          return {
+            ...state,
+            cart: omit(state.cart, product.id),
+          };
+        } else {
+          const newQuantity = (state.cart[product.id].quantity -= 1); // Possible to use id?
+          return {
+            ...state,
+            cart: {
+              ...state.cart,
+              [product.id]: {
+                ...state.cart[product.id],
+                quantity: newQuantity,
+              },
             },
-          },
+          };
+        }
+      } else {
+        return {
+          ...state,
         };
       }
     case Types.LOAD_INIT_STATE:
-      console.log('LOAD_INIT_STATE');
       const cart = product;
       return {
         ...state,
         cart,
       };
-      case Types.REMOVE_PRODUCT:
-        return {
-          ...state,
-          cart: omit(state.cart, product),
-        };
+    case Types.REMOVE_PRODUCT:
+      return {
+        ...state,
+        cart: omit(state.cart, product),
+      };
     default:
       return state;
   }

@@ -54,7 +54,11 @@ function App() {
             requireAuth() ? <Products /> : <Redirect to="/login" />
           }
         />
-        <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/checkout" 
+                render={() =>
+                  requireAuth() ? <Checkout /> : <Redirect to="/login" />
+                }
+        />
         <Route
           exact
           path="/profile"
