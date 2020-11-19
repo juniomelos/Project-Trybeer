@@ -35,7 +35,7 @@ const userReducer = (state = initialState, { type, payload }) => {
         session: { isLoggedIn: true, token: payload.token },
       };
     case Types.LOGOUT:
-      return { initialState };
+      return { ...initialState };
     case Types.ERROR:
       return { ...state, errors: [...state.errors, payload.error] };
     default:
@@ -75,7 +75,7 @@ export const userSignup = (userData) => (dispatch) => {
     .then((response) => {
       /** Verifica se o recurso foi criado no BD e procede */
       /** Faz login se ok */
-      if (response.status === 201) {
+      if (response.status === 200) {
         dispatch(login(response.data));
       }
     })

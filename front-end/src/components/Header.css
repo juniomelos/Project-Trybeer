@@ -13,6 +13,8 @@
 
 .sidebarwrapper {
   display: flex;
+  position: fixed;
+  width: 700px;
 }
 .sidebar {
   height: 100%;

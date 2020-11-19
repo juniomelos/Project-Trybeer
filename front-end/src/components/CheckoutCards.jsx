@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './CheckoutCards.css'
+import { removeProduct } from '../store/ducks/productsCart';
 
 const CheckoutCards = () => {
   const dispatch = useDispatch();
@@ -11,27 +12,26 @@ const CheckoutCards = () => {
 
   return (
     <div>
-
-
+      {Object.keys(cart).length === 0 && <h1>Não há produtos no carrinho</h1>}
       {Object.keys(cart).map((keyName, i) => (
-        <div className="card">
-          <h3>
+        <div key={cart[keyName].name} className="card">
+          <h3 data-testid={`${i}-product-qtd-input`} >
             {cart[keyName].quantity}
           </h3>
-          <h3>
+          <h3 data-testid={`${i}-product-name`} >
             {cart[keyName].name}
           </h3>
-          <h3>
+          <h3 data-testid={`${i}-product-total-value`}>
             R$: {cart[keyName].price * cart[keyName].quantity}
           </h3>
-          <h4>
+          <h4 data-testid={`${i}-product-unit-price`}>
             Preco unitario R$: {cart[keyName].price}
-          </h4>
+          </h4 >
+          <button data-testid={`${i}-removal-button`} onClick={() => dispatch(removeProduct([keyName]))} >X</button>
         </div>
-      ))}
-
-
-    </div>
+      ))
+      }
+    </div >
   )
 }
 export default CheckoutCards;
