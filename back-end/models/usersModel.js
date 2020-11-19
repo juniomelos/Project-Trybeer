@@ -42,22 +42,6 @@ const registerUsersMod = async (name, email, password, role) => {
   }
 };
 
-const getAllUsersMod = async (userEmail) => {
-  try {
-    const db = await connection();
-    const usersDB = await db
-      .getTable('users')
-      .select()
-      .where('email = :email')
-      .bind('email', userEmail)
-      .execute();
-    const [id, name, email, password, role] = await usersDB.fetchAll();
-    return { id, name, email, password, role };
-  } catch (error) {
-    return error;
-  }
-};
-
 const updateUsersNameMod = async (name, email) => {
   try {
     const db = await connection();
@@ -74,9 +58,26 @@ const updateUsersNameMod = async (name, email) => {
   }
 };
 
+const getAllUsers = async () => {
+  try {
+    const db = await connection();
+    const usersDB = await db.getTable('users').select().execute();
+    const allUsers = await usersDB.fetchAll();
+    return allUsers.map(([id, name, email, password, role]) => ({
+      id,
+      name,
+      email,
+      password,
+      role,
+    }));
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   getUserByEmailMod,
   registerUsersMod,
-  getAllUsersMod,
   updateUsersNameMod,
+  getAllUsers,
 };

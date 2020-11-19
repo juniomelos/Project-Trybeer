@@ -1,16 +1,11 @@
-const {
-  getUserByEmailMod,
-  registerUsersMod,
-  getAllUsersMod,
-  updateUsersNameMod,
-} = require('./usersModel');
-
-const { getAllProductMod } = require('./productModel');
+const { getAllProductMod } = require('./productsModel');
+const usersModel = require('./usersModel');
+const salesModel = require('./salesModel');
+const salesProductsModel = require('./salesProductsModel');
 
 module.exports = {
-  getUserByEmailMod,
-  registerUsersMod,
-  getAllUsersMod,
   getAllProductMod,
-  updateUsersNameMod,
+  usersModel,
+  salesModel,
+  salesProductsModel,
 };
