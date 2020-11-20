@@ -65,7 +65,7 @@ export const postOrder = (cart, email, total, address, number, token) => (
   });
   const payload = {
     email,
-    total,
+    total: 12,
     address,
     number,
     date: '2020-10-10',
