@@ -1,4 +1,3 @@
-const Schema = require('@mysql/xdevapi/lib/DevAPI/Schema');
 const { Router } = require('express');
 const { salesController } = require('../controllers');
 const middleware = require('../middlewares');
@@ -6,9 +5,7 @@ const middleware = require('../middlewares');
 const salesRouter = Router();
 
 salesRouter
-  // .post('/', middleware.authJWT, middleware.validateFinishSales, salesController.finishSales)
-  .post('/', salesController.finishSales)
-  // .put('/', middleware.authJWT, middleware.validateUpdateStatusSales, salesController.updateStatusCont)
+  .post('/', middleware.authJWT, middleware.validateFinishSales, salesController.finishSales)
   .get('/', middleware.authJWT, salesController.allSales);
 
 module.exports = { salesRouter };

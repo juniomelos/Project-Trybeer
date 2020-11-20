@@ -6,7 +6,6 @@ import cartReducer from './productsCart';
 import productsReducer from './products';
 import ordersReducer from './orders';
 
-
 const rootReducer = combineReducers({
   userReducer,
   sideBarHideReducer,

@@ -5,14 +5,11 @@ import { postOrder } from '../store/ducks/orders';
 import { useHistory } from 'react-router-dom';
 import { deleteFromLocalStorage } from '../services/localStorage';
 
-
 const CheckoutForm = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const cart = useSelector(
-    (state) => state.cartReducer.cart,
-  );
+  const cart = useSelector((state) => state.cartReducer.cart);
 
   const { user, session } = useSelector(
     (state) => state.userReducer,
@@ -39,7 +36,7 @@ const CheckoutForm = (props) => {
     dispatch(postOrder(cart, user.email,
       props.total, address.street, address.number, session.token));
     deleteFromLocalStorage('cart');
-    setTimeout(goToProducts, 1000)
+    setTimeout(goToProducts, 1000);
   };
 
   return (
@@ -49,7 +46,7 @@ const CheckoutForm = (props) => {
           <h3>Endereço</h3>
           <label>
             Rua:
-        <input
+            <input
               name="street"
               type="text"
               data-testid="checkout-street-input"
@@ -62,7 +59,7 @@ const CheckoutForm = (props) => {
           </label>
           <label>
             Número da casa:
-        <input
+            <input
               name="number"
               type="number"
               data-testid="checkout-house-number-input"
@@ -75,13 +72,15 @@ const CheckoutForm = (props) => {
           </label>
         </form>
       </div>
-      <button data-testid="checkout-finish-btn" onClick={handleClick}
+      <button
+        data-testid="checkout-finish-btn"
+        onClick={handleClick}
         disabled={!props.total > 0 || address.street.length < 1 || address.number.length < 1}
-      >Finalizar Pedido </button>
+      >
+        Finalizar Pedido{' '}
+      </button>
       {messageCheckOk && <h2>Compra realizada com sucesso!</h2>}
     </div>
-  )
-}
+  );
+};
 export default CheckoutForm;
-
-

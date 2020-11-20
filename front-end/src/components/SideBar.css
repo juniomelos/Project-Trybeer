@@ -1,14 +1,14 @@
-
-.side-menu-container, .admin-side-bar-container {
+.side-menu-container,
+.admin-side-bar-container {
   background-color: black;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   /* justify-content: start; */
-  
+
   padding: 15px;
-  height: calc(100vh - 122px)
+  height: calc(100vh - 122px);
 }
 ul {
   display: flex;
@@ -27,5 +27,5 @@ li {
 
 a {
   color: white;
-  text-decoration: none
+  text-decoration: none;
 }

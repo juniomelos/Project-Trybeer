@@ -12,7 +12,7 @@ const initialState = {
   isVisible: false,
 };
 
-const sideBarHideReducer = (state = initialState, {type}) => {   
+const sideBarHideReducer = (state = initialState, { type }) => {
   switch (type) {
     case Types.CHANGE_VISIBILITY:
       return {

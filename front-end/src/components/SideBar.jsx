@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  deleteFromLocalStorage,
-  loadFromLocalStorage,
-} from '../services/localStorage';
+import { deleteFromLocalStorage, loadFromLocalStorage } from '../services/localStorage';
 import { useHistory, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/ducks/user';
@@ -57,11 +54,7 @@ const SideBar = ({ userType }) => {
   };
 
   return (
-    <div
-      className={
-        role === 'client' ? 'side-menu-container' : 'admin-side-bar-container'
-      }
-    >
+    <div className={role === 'client' ? 'side-menu-container' : 'admin-side-bar-container'}>
       <ul>
         {menus[role].map((menu) => (
           <li>
