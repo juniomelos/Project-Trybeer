@@ -1,4 +1,5 @@
 import React from 'react';
+import jwtDecode from 'jwt-decode';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,22 +13,26 @@ import { login } from './store/ducks/user';
 import Register from './pages/Register/Register';
 import Products from './pages/Products/Products';
 import Checkout from './pages/Checkout/Checkout';
+import ClientOrders from './pages/ClientOrders/ClientOrders';
 import ClientProfile from './pages/ClientProfile/ClientProfile';
-import jwt_decode from 'jwt-decode';
 import './App.css';
+import AdminProfile from './pages/AdminProfile';
+import Orders from './pages/Orders';
 
 function App() {
   const dispatch = useDispatch();
 
+  const numDivisionDate = 1000; // eslint remote
+
   const requireAuth = () => {
     const userData = loadFromLocalStorage('user');
-    console.log('requireAuth', userData.name);
+
     if (userData != null) {
-      console.log('userData inside if', userData);
-      const decoded = jwt_decode(userData.token);
-      const now = Date.now().valueOf() / 1000; //inspiration from web Stackflow
+      const decoded = jwtDecode(userData.token);
+      const now = Date.now().valueOf() / numDivisionDate; // inspiration from web Stackflow
       if (typeof decoded.exp !== 'undefined' && decoded.exp > now) {
         const user = {
+          id: userData.id,
           name: userData.name,
           email: userData.email,
           role: userData.role,
@@ -45,20 +50,31 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/orders" component={ClientOrders} />
         <Route
           exact
           path="/products"
-          render={() =>
-            requireAuth() ? <Products /> : <Redirect to="/login" />
-          }
+          render={ () => (requireAuth() ? <Products /> : <Redirect to="/login" />) }
         />
-        <Route exact path="/checkout" component={Checkout} />
+        <Route
+          exact
+          path="/checkout"
+          render={ () => (requireAuth() ? <Checkout /> : <Redirect to="/login" />) }
+        />
         <Route
           exact
           path="/profile"
-          render={() =>
-            requireAuth() ? <ClientProfile /> : <Redirect to="/login" />
-          }
+          render={ () => (requireAuth() ? <ClientProfile /> : <Redirect to="/login" />) }
+        />
+        <Route
+          exact
+          path="/admin/orders"
+          render={ () => (requireAuth() ? <Orders /> : <Redirect to="/login" />) }
+        />
+        <Route
+          exact
+          path="/admin/profile"
+          render={ () => (requireAuth() ? <AdminProfile /> : <Redirect to="/login" />) }
         />
       </Switch>
     </Router>

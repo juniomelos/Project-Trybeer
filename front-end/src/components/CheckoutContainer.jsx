@@ -10,15 +10,15 @@ import CheckoutForm from './CheckoutForm';
 const CheckoutContainer = () => {
   const dispatch = useDispatch();
 
-  const cart = useSelector(
-    (state) => state.cartReducer.cart,
-  );
+  const cart = useSelector((state) => state.cartReducer.cart);
 
   //Each loading cart is load from localstorage
   useEffect(() => {
-    const localStoreCart = loadFromLocalStorage('cart')
-    dispatch(loadInitCart(localStoreCart.cart));
-  }, [])
+    const localStoreCart = loadFromLocalStorage('cart');
+    if (localStoreCart !== null) dispatch(loadInitCart(localStoreCart.cart));
+
+    // dispatch(loadInitCart(localStoreCart.cart));
+  }, []);
 
   const totalCart = () => {
     let totalSummed = 0;
@@ -26,11 +26,8 @@ const CheckoutContainer = () => {
       totalSummed += cart[key].price * cart[key].quantity;
     });
     setTotal(totalSummed);
-
-  }
-  const [total, setTotal] = useState(
-    0
-  );
+  };
+  const [total, setTotal] = useState(0);
 
   const [address, setAddress] = useState({
     street: '',
@@ -38,18 +35,16 @@ const CheckoutContainer = () => {
   });
 
   useEffect(() => {
-    totalCart()
-  }, [cart])
+    totalCart();
+  }, [cart]);
 
-  return (<div>
-    <CheckoutCards />
-    <div className="form">
+  return (
+    <div>
+      <CheckoutCards />
+      <div className="form"></div>
+      <h2 data-testid="order-total-value">R$ {total.toFixed(2).toString().replace('.', ',')}</h2>
+      <CheckoutForm total={total} />
     </div>
-    <h2 data-testid="order-total-value">
-      {Math.round(total * 100) / 100}
-    </h2>
-    <CheckoutForm total={total} />
-  </div>
-  )
-}
+  );
+};
 export default CheckoutContainer;

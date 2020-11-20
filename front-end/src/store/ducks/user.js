@@ -15,6 +15,7 @@ export const Types = {
 
 const initialState = {
   user: {
+    id: '',
     name: '',
     email: '',
     role: '',
@@ -35,7 +36,7 @@ const userReducer = (state = initialState, { type, payload }) => {
         session: { isLoggedIn: true, token: payload.token },
       };
     case Types.LOGOUT:
-      return { initialState };
+      return { ...initialState };
     case Types.ERROR:
       return { ...state, errors: [...state.errors, payload.error] };
     default:
@@ -66,7 +67,10 @@ export const hasErrored = (error) => ({
 
 export const userLogin = (email, password) => (dispatch) => {
   UserService.userLogin({ email, password })
-    .then((userLogin) => dispatch(login(userLogin.data)))
+    .then((userLogin) => {
+     return dispatch(login(userLogin.data))
+    }
+      )
     .catch((error) => dispatch(hasErrored(error)));
 };
 
@@ -75,7 +79,7 @@ export const userSignup = (userData) => (dispatch) => {
     .then((response) => {
       /** Verifica se o recurso foi criado no BD e procede */
       /** Faz login se ok */
-      if (response.status === 201) {
+      if (response.status === 200) {
         dispatch(login(response.data));
       }
     })

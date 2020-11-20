@@ -1,65 +1,73 @@
 import React, { useState, useEffect } from 'react';
 import { deleteFromLocalStorage, loadFromLocalStorage } from '../services/localStorage';
 import { useHistory, Redirect } from 'react-router-dom';
-import { useDispatch, } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/ducks/user';
 
 import { Link } from 'react-router-dom';
 
 import './SideBar.css';
 
-const SideBar = () => {
+const menus = {
+  client: [
+    {
+      route: '/products',
+      label: 'Products',
+      dataTestID: 'side-menu-item-products',
+    },
+    {
+      route: '/orders',
+      label: 'Meu Pedidos',
+      dataTestID: 'side-menu-item-my-orders',
+    },
+    {
+      route: '/profile',
+      label: 'Meu Perfil',
+      dataTestID: 'side-menu-item-my-profile',
+    },
+  ],
+  administrator: [
+    {
+      route: '/admin/orders',
+      label: 'Pedidos',
+      dataTestID: 'side-menu-item-orders',
+    },
+    {
+      route: '/admin/profile',
+      label: 'Meu Perfil',
+      dataTestID: 'side-menu-item-profile',
+    },
+  ],
+};
+
+const SideBar = ({ userType }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   // Set all local Action/Reducers
-  const [navigate, setNavigate] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.userReducer.session);
+  const { role } = useSelector((state) => state.userReducer.user);
 
-  function handleClick(e) {
-    e.preventDefault();
-    console.log("handleClick sidebar");
-    dispatch(logout()); //async
+  const handleClick = () => {
+    dispatch(logout());
     deleteFromLocalStorage('user');
-    setNavigate(true);
-    setTimeout(function(){ 
-      // history.push('/login')
-    }, 1000);
-  }
-
-  if (navigate) {
-    return (
-
-
-      <Redirect to="/login" push={false}  />
-
-    )
-
-  }
-
+    history.push('/login');
+  };
 
   return (
-    <div className="side-menu-container">
+    <div className={role === 'client' ? 'side-menu-container' : 'admin-side-bar-container'}>
       <ul>
-        <li>
-          <Link to={"/products"} data-testid="side-menu-item-products">
-            Produtos
-          </Link>
-        </li>
-        <li>
-          <Link to={"/orders"} data-testid="side-menu-item-my-orders">
-            Meu Pedidos
-          </Link>
-        </li>
-        <li>
-          <Link to={"/profile"} data-testid="side-menu-item-my-profile">
-            Meu Perfil
-          </Link>
-        </li>
+        {menus[role].map((menu) => (
+          <li>
+            <Link to={menu.route} data-testid={menu.dataTestID}>
+              {menu.label}
+            </Link>
+          </li>
+        ))}
       </ul>
-      <button
-        data-testid="side-menu-item-logout"
-        onClick={handleClick}
-      >Sair</button>
+      <button data-testid="side-menu-item-logout" onClick={handleClick}>
+        Sair
+      </button>
     </div>
-  )
-}
+  );
+};
 export default SideBar;
