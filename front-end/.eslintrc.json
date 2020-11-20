@@ -14,6 +14,7 @@
   },
   "plugins": ["react", "react-hooks"],
   "rules": {
+    "react-hooks/exhaustive-deps": ["off"],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
