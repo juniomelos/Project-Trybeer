@@ -91,6 +91,9 @@ class UserService {
       },
     );
   };
+  
+  /** Get all orders */
+  getOrders = async () => this.http.get('/orders');
 }
 
 export default new UserService();

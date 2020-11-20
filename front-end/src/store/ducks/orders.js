@@ -7,6 +7,7 @@ import UserService from '../../services/trybeerAPI';
 export const Types = {
   POST_ORDER: 'POST_ORDER',
   ERROR_ORDER: 'ERROR_ORDER',
+  GET_ORDER: 'GET_ORDER',
 };
 
 /** Reducers */
@@ -23,6 +24,11 @@ const ordersReducer = (state = initialState, { type, payload }) => {
         ...state,
         postOrderSuccess: true,
       };
+      case Types.GET_ORDER:
+        return {
+
+
+        }
     case Types.ERROR_ORDER:
       return {
         ...state,
@@ -41,6 +47,11 @@ const ordersReducer = (state = initialState, { type, payload }) => {
 
 export const sendOrder = (payload) => ({
   type: Types.POST_ORDER,
+  payload,
+});
+
+export const receivedOrder = (payload) => ({
+  type: Types.GET_ORDER,
   payload,
 });
 
@@ -85,5 +96,19 @@ export const postOrder = (cart, email, total, address, number, token) => (
      )
     .catch((error) => dispatch(hasErrored(error)));
 };
+
+
+export const getOrders = (userData) => (dispatch) => {
+  UserService.getOrders(userData)
+    .then((response) => {
+      /** Verifica se o recurso foi criado no BD e procede */
+      /** Faz login se ok */
+      if (response.status === 200) {
+        dispatch(receivedOrder(response.data));
+      }
+    })
+    .catch((error) => dispatch(hasErrored(error)));
+};
+
 
 export default ordersReducer;
