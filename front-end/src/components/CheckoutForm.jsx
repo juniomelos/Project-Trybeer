@@ -23,9 +23,7 @@ const CheckoutForm = (props) => {
   });
 
   function goToProducts() {
-
     history.push('/products');
-
   }
 
 
