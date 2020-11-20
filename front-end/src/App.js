@@ -32,6 +32,7 @@ function App() {
       const now = Date.now().valueOf() / numDivisionDate; // inspiration from web Stackflow
       if (typeof decoded.exp !== 'undefined' && decoded.exp > now) {
         const user = {
+          id: userData.id,
           name: userData.name,
           email: userData.email,
           role: userData.role,

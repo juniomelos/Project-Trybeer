@@ -15,12 +15,10 @@ class UserService {
   }
 
   handleSuccess(response) {
-    console.log('inside handleSuccess', response);
-       return response;
+    return response;
   }
 
   handleError = (error) => {
-    console.log('inside handleError', error, error.response);
     let errorMsg;
     switch (error.response.status) {
       case 500:
@@ -35,7 +33,6 @@ class UserService {
             code: error.response.status,
           },
         };
-
         break;
     }
 
@@ -61,7 +58,6 @@ class UserService {
   /** User Name Update */
 
   async userNameUpdate(email, name) {
-    console.log('inside trybeerAPI userNameUpdate');
     const body = {
       email,
       name,
@@ -91,6 +87,9 @@ class UserService {
       },
     );
   };
+
+  /** Get all orders */
+  getOrders = async () => this.http.get('/orders');
 }
 
 export default new UserService();
