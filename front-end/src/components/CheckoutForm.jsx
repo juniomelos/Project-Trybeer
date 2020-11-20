@@ -29,7 +29,7 @@ const CheckoutForm = (props) => {
 
   const handleClick = () => {
     dispatch(loadInitCart({}))
-    dispatch(postOrder(cart, user.email,
+    dispatch(postOrder(cart, user.id, user.email,
       props.total, address.street, address.number, session.token));
     deleteFromLocalStorage('cart');
     setTimeout(goToProducts, 1000);

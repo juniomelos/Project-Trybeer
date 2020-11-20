@@ -62,7 +62,7 @@ export const hasErrored = (error) => ({
 
 /** Actions Creators */
 
-export const postOrder = (cart, email, total, address, number, token) => (
+export const postOrder = (cart, id, email, total, address, number, token) => (
   dispatch,
 ) => {
   const cartArray = [];
@@ -72,28 +72,19 @@ export const postOrder = (cart, email, total, address, number, token) => (
       quantity: cart[key].quantity,
     });
   });
-  let date = new Date();
-  const dateAndMonth = `${('0' + date.getDate()).slice(-2)}/${(
-    '0' +
-    (date.getMonth() + 1)
-  ).slice(-2)}`;
-  console.log("type of total:", typeof dateAndMonth);
 
   const payload = {
+    id,
     email,
     total: total.toString(),
     address,
     number,
-    date: dateAndMonth,
     products: cartArray,
   };
-  console.log('inside postOrder Action creator', payload, token);
   UserService.postOrder(payload, token)
     .then((res) => {
-      console.log("postOrder API res", res);
-     return dispatch(sendOrder(res))
-    }
-     )
+      return dispatch(sendOrder(res));
+    })
     .catch((error) => dispatch(hasErrored(error)));
 };
 
