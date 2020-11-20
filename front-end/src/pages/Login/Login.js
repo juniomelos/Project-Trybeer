@@ -5,7 +5,6 @@ import FormLogin from '../../components/FormLogin';
 import { saveToLocalStorage } from '../../services/localStorage';
 
 const Login = () => {
-
   const { token, isLoggedIn } = useSelector((state) => state.userReducer.session);
   const userData = useSelector((state) => state.userReducer.user);
   const history = useHistory();
@@ -14,9 +13,7 @@ const Login = () => {
     if (isLoggedIn) {
       saveToLocalStorage('user', { token, ...userData });
 
-      userData.role === 'client'
-        ? history.push('/products')
-        : history.push('/admin/orders');
+      userData.role === 'client' ? history.push('/products') : history.push('/admin/orders');
     }
   }, [isLoggedIn]);
 

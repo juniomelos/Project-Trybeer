@@ -14,9 +14,9 @@ class UserService {
     this.http.interceptors.response.use(this.handleSuccess, this.handleError);
   }
 
-  handleSuccess = (response) => {
+  handleSuccess(response) {
     return response;
-  };
+  }
 
   handleError = (error) => {
     let errorMsg;
@@ -26,8 +26,13 @@ class UserService {
           error: { message: 'E-mail already in database.', code: 500 },
         };
         break;
-
       default:
+        errorMsg = {
+          error: {
+            message: error.response.statusText,
+            code: error.response.status,
+          },
+        };
         break;
     }
 
@@ -48,13 +53,11 @@ class UserService {
       role: admin ? 'administrator' : 'client',
     };
 
-
     return this.http.post('/register', body);
   };
   /** User Name Update */
 
   async userNameUpdate(email, name) {
-    console.log('inside trybeerAPI userNameUpdate');
     const body = {
       email,
       name,
@@ -66,6 +69,27 @@ class UserService {
   /** Get all products */
   getProducts = async () => this.http.get('/products');
 
+  /** Post one order */
+  postOrder = async (payload, token) => {
+    return this.http.post(
+      '/sales',
+
+      {
+        ...payload,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+      {
+        body: {},
+      },
+    );
+  };
+
+  /** Get all orders */
+  getOrders = async () => this.http.get('/orders');
 }
 
 export default new UserService();
