@@ -30,7 +30,6 @@ const initialState = {
 const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case Types.LOGIN:
-      console.log("Types.LOGIN", payload);
       return {
         ...state,
         user: payload.data,
@@ -69,7 +68,6 @@ export const hasErrored = (error) => ({
 export const userLogin = (email, password) => (dispatch) => {
   UserService.userLogin({ email, password })
     .then((userLogin) => {
-      console.log("userLogin", userLogin);
      return dispatch(login(userLogin.data))
     }
       )
