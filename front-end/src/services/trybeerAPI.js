@@ -15,7 +15,8 @@ class UserService {
   }
 
   handleSuccess(response) {
-    return response;
+    console.log('inside handleSuccess', response);
+       return response;
   }
 
   handleError = (error) => {

@@ -15,12 +15,12 @@ const CheckoutForm = (props) => {
     (state) => state.userReducer,
   );
 
+  const postOrderSuccess = useSelector((state) => state.ordersReducer.postOrderSuccess);
+
   const [address, setAddress] = useState({
     street: '',
     number: '',
   });
-
-  const [messageCheckOk, setMessageCheckOk] = useState(false);
 
   function goToProducts() {
 
@@ -30,9 +30,7 @@ const CheckoutForm = (props) => {
 
 
   const handleClick = () => {
-    setMessageCheckOk(true)
     dispatch(loadInitCart({}))
-    console.log("type of total:", typeof props.total);
     dispatch(postOrder(cart, user.email,
       props.total, address.street, address.number, session.token));
     deleteFromLocalStorage('cart');
@@ -79,7 +77,7 @@ const CheckoutForm = (props) => {
       >
         Finalizar Pedido{' '}
       </button>
-      {messageCheckOk && <h2>Compra realizada com sucesso!</h2>}
+      {postOrderSuccess && <h2>Compra realizada com sucesso!</h2>}
     </div>
   );
 };

@@ -17,7 +17,6 @@ const initialState = {
 };
 
 const ordersReducer = (state = initialState, { type, payload }) => {
-  console.log('orderReducer', type, payload);
   switch (type) {
     case Types.POST_ORDER:
       return {
@@ -25,7 +24,6 @@ const ordersReducer = (state = initialState, { type, payload }) => {
         postOrderSuccess: true,
       };
     case Types.ERROR_ORDER:
-      console.log('payload', payload);
       return {
         ...state,
         errors: [
@@ -41,9 +39,9 @@ const ordersReducer = (state = initialState, { type, payload }) => {
 
 /** Actions */
 
-export const sendOrder = (data) => ({
+export const sendOrder = (payload) => ({
   type: Types.POST_ORDER,
-  data,
+  payload,
 });
 
 export const hasErrored = (error) => ({
@@ -63,28 +61,28 @@ export const postOrder = (cart, email, total, address, number, token) => (
       quantity: cart[key].quantity,
     });
   });
+  let date = new Date();
+  const dateAndMonth = `${('0' + date.getDate()).slice(-2)}/${(
+    '0' +
+    (date.getMonth() + 1)
+  ).slice(-2)}`;
+  console.log("type of total:", typeof dateAndMonth);
+
   const payload = {
     email,
-    total: 12,
+    total: total.toString(),
     address,
     number,
-    date: '2020-10-10',
-products: cartArray,
-    // products: [
-    //   {
-    //     productId: 8,
-    //     quantity: 5,
-    //   },
-    //   {
-    //     productId: 4,
-    //     quantity: 5,
-    //   },
-    // ],
-
+    date: dateAndMonth,
+    products: cartArray,
   };
-  console.log('inside postOrder Acrion creator', payload, token);
+  console.log('inside postOrder Action creator', payload, token);
   UserService.postOrder(payload, token)
-    .then((res) => dispatch(sendOrder(res.data)))
+    .then((res) => {
+      console.log("postOrder API res", res);
+     return dispatch(sendOrder(res))
+    }
+     )
     .catch((error) => dispatch(hasErrored(error)));
 };
 

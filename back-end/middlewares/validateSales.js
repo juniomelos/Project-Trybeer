@@ -4,7 +4,7 @@ const schema = {
   finishSales: joi.object({
     email: joi.string().email()
       .required(),
-    total: joi.number()
+    total: joi.string()
       .required(),
     address: joi.string().min(3)
       .max(100)
