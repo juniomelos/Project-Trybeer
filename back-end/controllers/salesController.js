@@ -9,24 +9,14 @@ const allSales = rescue(async (_req, res) => {
 });
 
 const finishSales = rescue(async (req, res) => {
-  const { email, total, address, number, date, products } = req.body;
+  const { id, total, address, number, date, products, status } = req.body;
 
-  const newSale = await salesServices.finishSalesServ(
-    email,
-    total,
-    address,
-    number,
-    date,
-  );
+  const newSale = await salesServices.finishSalesServ(id, total, address, number, date, status);
 
   for (let i = 0; i < products.length; i += 1) {
     const { productId, quantity } = products[i];
 
-    salesProductsModel.postRegisterSalesProductsMod(
-      newSale.saleId,
-      productId,
-      quantity,
-    );
+    salesProductsModel.postRegisterSalesProductsMod(newSale.saleId, productId, quantity);
   }
 
   res.status(200).json(newSale);
