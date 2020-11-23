@@ -8,7 +8,6 @@ const allSalesSev = async () => {
 
 const finishSalesServ = async (id, total, address, number) => {
   const totalToInsert = total.replace(',', '.');
-  console.log("id - finish serve", id);
 
   const dateNow = new Date();
   const date = `${dateNow.getFullYear()}-${
