@@ -18,7 +18,7 @@ class UserService {
     return response;
   }
 
-  handleError = (error) => {
+  handleError(error) {
     let errorMsg;
     switch (error.response.status) {
       case 500:
@@ -37,14 +37,21 @@ class UserService {
     }
 
     throw errorMsg;
-  };
+  }
 
   /** User login */
-  userLogin = async (body) => this.http.post('/login', body);
+  async userLogin(body) {
+    return this.http.post('/login', body);
+  }
 
   /** User signup */
-  userSignup = async (userData) => {
-    const { email, name, password, admin } = userData;
+  async userSignup(userData) {
+    const {
+      email,
+      name,
+      password,
+      admin,
+    } = userData;
 
     const body = {
       email,
@@ -54,7 +61,7 @@ class UserService {
     };
 
     return this.http.post('/register', body);
-  };
+  }
   /** User Name Update */
 
   async userNameUpdate(email, name) {
@@ -67,10 +74,12 @@ class UserService {
   }
 
   /** Get all products */
-  getProducts = async () => this.http.get('/products');
+  async getProducts() {
+    return this.http.get('/products');
+  }
 
   /** Post one order */
-  postOrder = async (payload, token) => {
+  async postOrder(payload, token) {
     return this.http.post(
       '/sales',
 

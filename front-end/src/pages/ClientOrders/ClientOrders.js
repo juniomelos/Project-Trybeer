@@ -1,19 +1,15 @@
- import React from 'react';
+import React from 'react';
 import ClientOrdersContainer from '../../components/ClientOrdersContainer';
 import Header from '../../components/Header';
 
-
 const ClientOrders = () => {
-
-    return (
-      <>
+  return (
+    <>
       <Header />
 
-<ClientOrdersContainer />
-
-</>
-    );
-  
-}
+      <ClientOrdersContainer />
+    </>
+  );
+};
 
 export default ClientOrders;

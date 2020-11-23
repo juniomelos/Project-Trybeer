@@ -69,12 +69,11 @@ export const postOrder = (cart, id, email, total, address, number, token) => (
   dispatch,
 ) => {
   const cartArray = [];
-  Object.keys(cart).map(function (key) {
-    cartArray.push({
+  Object.keys(cart).map((key) => cartArray
+    .push({
       productId: key,
       quantity: cart[key].quantity,
-    });
-  });
+    }));
 
   const payload = {
     id,
@@ -85,9 +84,7 @@ export const postOrder = (cart, id, email, total, address, number, token) => (
     products: cartArray,
   };
   UserService.postOrder(payload, token)
-    .then((res) => {
-      return dispatch(sendOrder(res));
-    })
+    .then((res) => dispatch(sendOrder(res)))
     .catch((error) => dispatch(hasErrored(error)));
 };
 
