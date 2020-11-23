@@ -7,7 +7,7 @@ const adminRouter = Router();
 
 adminRouter
   .get('/', middleware.authJWT, adminController.getProfile)
-  .get('/orders/:id', adminController.getAdminSales)
+  .get('/orders/:id', middleware.authJWT, adminController.getAdminSales)
   .put(
     '/',
     middleware.authJWT,
