@@ -18,9 +18,10 @@ const initialState = {
 };
 
 const cartReducer = (state = initialState, { type, product }) => {
+  const { id, name, price } = product;
+
   switch (type) {
     case Types.ADD_TO_CART:
-      let { id, name, price } = product;
       if (state.cart[id] !== undefined) {
         const newQuantity = (state.cart[id].quantity += 1);
         return {
@@ -33,19 +34,18 @@ const cartReducer = (state = initialState, { type, product }) => {
             },
           },
         };
-      } else {
-        return {
-          ...state,
-          cart: {
-            ...state.cart,
-            [id]: {
-              quantity: 1,
-              name,
-              price,
-            },
-          },
-        };
       }
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          [id]: {
+            quantity: 1,
+            name,
+            price,
+          },
+        },
+      };
     case Types.REMOVE_TO_CART:
       if (state.cart[product.id] !== undefined) {
         if (state.cart[product.id].quantity === 1) {
@@ -53,24 +53,23 @@ const cartReducer = (state = initialState, { type, product }) => {
             ...state,
             cart: omit(state.cart, product.id),
           };
-        } else {
-          const newQuantity = (state.cart[product.id].quantity -= 1); // Possible to use id?
-          return {
-            ...state,
-            cart: {
-              ...state.cart,
-              [product.id]: {
-                ...state.cart[product.id],
-                quantity: newQuantity,
-              },
-            },
-          };
         }
-      } else {
+        const newQuantity = (state.cart[product.id].quantity -= 1); // Possible to use id?
         return {
           ...state,
+          cart: {
+            ...state.cart,
+            [product.id]: {
+              ...state.cart[product.id],
+              quantity: newQuantity,
+            },
+          },
         };
       }
+      return {
+        ...state,
+      };
+
     case Types.LOAD_INIT_STATE:
       const cart = product;
       return {
