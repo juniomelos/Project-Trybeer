@@ -37,6 +37,7 @@
       }
     ],
     "no-param-reassign": ["off"],
+    "no-multi-assign": ["warn"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/default-props-match-prop-types": ["error", { "allowRequiredDefaults": false }],
     "react/destructuring-assignment": ["error", "always"],

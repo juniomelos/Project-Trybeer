@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   sideBarHideReducer,
   cartReducer,
   productsReducer,
-  ordersReducer
+  ordersReducer,
 });
 
 export default rootReducer;

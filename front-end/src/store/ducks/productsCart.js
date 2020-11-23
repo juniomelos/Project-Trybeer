@@ -17,7 +17,10 @@ const initialState = {
   cart: {},
 };
 
-const cartReducer = (state = initialState, { type, product }) => {
+const cartReducer = (
+  state = initialState,
+  { type, product = { id: 0, name: '', price: 0 } },
+) => {
   const { id, name, price } = product;
 
   switch (type) {
@@ -71,10 +74,10 @@ const cartReducer = (state = initialState, { type, product }) => {
       };
 
     case Types.LOAD_INIT_STATE:
-      const cart = product;
+      console.log(product)
       return {
         ...state,
-        cart,
+        cart: product,
       };
     case Types.REMOVE_PRODUCT:
       return {
