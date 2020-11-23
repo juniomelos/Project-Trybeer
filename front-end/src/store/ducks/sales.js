@@ -5,7 +5,7 @@ import SalesService from '../../services/salesService';
 /** Actions Types */
 
 export const Types = {
-  SALES: 'SALES',
+  SALES_FETCHED: 'SALES_FETCHED',
   SALES_FETCHING: 'SALES_FETCHING',
   ERROR: 'ERROR',
 };
@@ -14,17 +14,29 @@ export const Types = {
 
 const initialState = {
   isFetching: false,
-  sales: [],
+  sales: {
+    pending: [],
+    delivered: [],
+  },
 };
 
 const salesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case Types.SALES_FETCHING:
-      return { ...initialState, isFetching: payload.status };
-    case Types.SALES:
+      return { ...state, isFetching: payload.status };
+    case Types.SALES_FETCHED:
       return {
         ...state,
-        sales: payload.sales,
+        sales: {
+          pending: [
+            ...state.sales.pending,
+            ...payload.sales.filter((sale) => sale.status === 'Pendente'),
+          ],
+          delivered: [
+            ...state.sales.pending,
+            ...payload.sales.filter((sale) => sale.status === 'Entregue'),
+          ],
+        },
       };
     case Types.ERROR:
       return { ...state, errors: [...state.errors, payload.error] };
@@ -42,7 +54,7 @@ export const salesFetching = (status) => ({
 });
 
 export const salesFetched = (sales) => ({
-  type: Types.SALES,
+  type: Types.SALES_FETCHED,
   payload: {
     sales,
   },
