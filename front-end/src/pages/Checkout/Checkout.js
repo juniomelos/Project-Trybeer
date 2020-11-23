@@ -5,8 +5,11 @@ import CheckoutContainer from '../../components/CheckoutContainer';
 
 function Checkout() {
   return (
-    <Header wrapper={ CheckoutContainer } /> // wrapper = component name to render
-  );
+    <>
+    <Header /> 
+  <CheckoutContainer />
+  </>
+    );
 }
 
 export default Checkout;

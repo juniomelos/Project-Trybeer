@@ -47,6 +47,7 @@ const postFinishSalesMod = async (id, total, address, number, date, status = 'Pe
       ])
       .values(id, total, address, number, date, status)
       .execute();
+
     return { id, total, address, number, date, status };
   } catch (error) {
     return error;
