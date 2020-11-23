@@ -1,6 +1,6 @@
 /** SALES REDUX */
 
-import UserService from '../../services/trybeerAPI';
+import SalesService from '../../services/salesService';
 
 /** Actions Types */
 
@@ -13,9 +13,8 @@ export const Types = {
 /** Reducers */
 
 const initialState = {
-  isFetching: true,
+  isFetching: false,
   sales: [],
-  saleProducts: [],
 };
 
 const salesReducer = (state = initialState, { type, payload }) => {
@@ -35,50 +34,38 @@ const salesReducer = (state = initialState, { type, payload }) => {
 };
 
 /** Actions */
-
-export const login = ({ token, data }) => ({
-  type: Types.LOGIN,
+export const salesFetching = (status) => ({
+  type: Types.SALES_FETCHING,
   payload: {
-    token,
-    data,
+    status,
   },
 });
 
-export const logout = () => ({
-  type: Types.LOGOUT,
+export const salesFetched = (sales) => ({
+  type: Types.SALES,
+  payload: {
+    sales,
+  },
 });
 
-export const hasErrored = (error) => ({
+export const hasErrored = (error = []) => ({
   type: Types.ERROR,
   payload: error,
 });
 
 /** Actions Creators */
 
-export const userLogin = (email, password) => (dispatch) => {
-  UserService.userLogin({ email, password })
-    .then((userLogin) => dispatch(login(userLogin.data)))
-    .catch((error) => dispatch(hasErrored(error)));
-};
+export const getSales = (authToken) => (dispatch) => {
+  dispatch(salesFetching(true));
 
-export const userSignup = (userData) => (dispatch) => {
-  UserService.userSignup(userData)
+  SalesService.getSales(authToken)
     .then((response) => {
-      /** Verifica se o recurso foi criado no BD e procede */
-      /** Faz login se ok */
       if (response.status === 200) {
-        dispatch(login(response.data));
+        dispatch(salesFetched(response.data));
+        dispatch(salesFetching(false));
       }
     })
     .catch((error) => dispatch(hasErrored(error)));
 };
 
-export const userNameUpdate = (name, email) => (dispatch) => {
-  UserService.userNameUpdate(name, email)
-    .then((DATA) => {
-      dispatch(login(DATA));
-    })
-    .catch((error) => dispatch(hasErrored(error)));
-};
-
-export default userReducer;
+export default salesReducer;

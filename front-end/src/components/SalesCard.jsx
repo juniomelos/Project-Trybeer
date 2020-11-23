@@ -1,9 +1,7 @@
 import React from 'react';
 
 const SalesCard = (sale) => {
-  return (<div>
-    
-  </div>);
+  return <div>teste ok</div>;
 };
 
 export default SalesCard;

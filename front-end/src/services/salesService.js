@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class UserService {
+class SalesService {
   constructor() {
     const url = 'http://localhost:3001';
     const timeout = 30000;
@@ -35,5 +35,8 @@ class UserService {
   };
 
   /** Get sales */
-  getSales = async () => this.http.get('/sales');
+  getSales = async (token) =>
+    this.http.get('/sales', { headers: { Authorization: token } });
 }
+
+export default new SalesService();
