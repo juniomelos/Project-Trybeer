@@ -33,6 +33,7 @@ function App() {
       const now = Date.now().valueOf() / numDivisionDate; // inspiration from web Stackflow
       if (typeof decoded.exp !== 'undefined' && decoded.exp > now) {
         const user = {
+          id: userData.id,
           name: userData.name,
           email: userData.email,
           role: userData.role,
@@ -51,7 +52,13 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route path="orders/:id" component={OrderDetail} />
-        <Route exact path="/orders" component={ClientOrders} />
+        <Route
+          exact
+          path="/orders"
+          render={() =>
+            requireAuth() ? <ClientOrders /> : <Redirect to="/login" />
+          }
+        />
         <Route
           exact
           path="/products"

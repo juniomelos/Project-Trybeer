@@ -14,6 +14,7 @@ export const Types = {
 
 const initialState = {
   postOrderSuccess: false,
+  getOrderSuccess: false,
   orders: [],
   errors: [],
 };
@@ -25,12 +26,12 @@ const ordersReducer = (state = initialState, { type, payload }) => {
         ...state,
         postOrderSuccess: true,
       };
-      case Types.GET_ORDER:
-        return {
-...state, 
-orders: payload
-
-        }
+    case Types.GET_ORDER:
+      return {
+        ...state,
+        orders: payload,
+        getOrderSuccess: true,
+      };
     case Types.ERROR_ORDER:
       return {
         ...state,
@@ -90,7 +91,6 @@ export const postOrder = (cart, id, email, total, address, number, token) => (
     .catch((error) => dispatch(hasErrored(error)));
 };
 
-
 export const getOrders = (token) => (dispatch) => {
   UserService.getOrders(token)
     .then((response) => {
@@ -102,6 +102,5 @@ export const getOrders = (token) => (dispatch) => {
     })
     .catch((error) => dispatch(hasErrored(error)));
 };
-
 
 export default ordersReducer;
