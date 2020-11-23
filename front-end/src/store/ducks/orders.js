@@ -14,6 +14,7 @@ export const Types = {
 
 const initialState = {
   postOrderSuccess: false,
+  orders: [],
   errors: [],
 };
 
@@ -26,7 +27,8 @@ const ordersReducer = (state = initialState, { type, payload }) => {
       };
       case Types.GET_ORDER:
         return {
-
+...state, 
+orders: payload
 
         }
     case Types.ERROR_ORDER:
@@ -89,8 +91,8 @@ export const postOrder = (cart, id, email, total, address, number, token) => (
 };
 
 
-export const getOrders = (userData) => (dispatch) => {
-  UserService.getOrders(userData)
+export const getOrders = (token) => (dispatch) => {
+  UserService.getOrders(token)
     .then((response) => {
       /** Verifica se o recurso foi criado no BD e procede */
       /** Faz login se ok */

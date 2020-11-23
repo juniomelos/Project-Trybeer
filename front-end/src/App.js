@@ -15,6 +15,7 @@ import Products from './pages/Products/Products';
 import Checkout from './pages/Checkout/Checkout';
 import ClientOrders from './pages/ClientOrders/ClientOrders';
 import ClientProfile from './pages/ClientProfile/ClientProfile';
+import OrderDetail from './pages/OrderDetail/OrderDetail';
 import './App.css';
 import AdminProfile from './pages/AdminProfile';
 import Orders from './pages/Orders';
@@ -32,7 +33,6 @@ function App() {
       const now = Date.now().valueOf() / numDivisionDate; // inspiration from web Stackflow
       if (typeof decoded.exp !== 'undefined' && decoded.exp > now) {
         const user = {
-          id: userData.id,
           name: userData.name,
           email: userData.email,
           role: userData.role,
@@ -50,31 +50,40 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route path="orders/:id" component={OrderDetail} />
         <Route exact path="/orders" component={ClientOrders} />
         <Route
           exact
           path="/products"
-          render={ () => (requireAuth() ? <Products /> : <Redirect to="/login" />) }
+          render={() =>
+            requireAuth() ? <Products /> : <Redirect to="/login" />
+          }
         />
         <Route
           exact
           path="/checkout"
-          render={ () => (requireAuth() ? <Checkout /> : <Redirect to="/login" />) }
+          render={() =>
+            requireAuth() ? <Checkout /> : <Redirect to="/login" />
+          }
         />
         <Route
           exact
           path="/profile"
-          render={ () => (requireAuth() ? <ClientProfile /> : <Redirect to="/login" />) }
+          render={() =>
+            requireAuth() ? <ClientProfile /> : <Redirect to="/login" />
+          }
         />
         <Route
           exact
           path="/admin/orders"
-          render={ () => (requireAuth() ? <Orders /> : <Redirect to="/login" />) }
+          render={() => (requireAuth() ? <Orders /> : <Redirect to="/login" />)}
         />
         <Route
           exact
           path="/admin/profile"
-          render={ () => (requireAuth() ? <AdminProfile /> : <Redirect to="/login" />) }
+          render={() =>
+            requireAuth() ? <AdminProfile /> : <Redirect to="/login" />
+          }
         />
       </Switch>
     </Router>

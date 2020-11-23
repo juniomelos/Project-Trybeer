@@ -88,7 +88,12 @@ class UserService {
     );
   };
   /** Get all orders */
-  getOrders = async () => this.http.get('/orders');
+  getOrders = async (token) =>
+    this.http.get('/orders', {
+      headers: {
+        Authorization: token,
+      },
+    });
 }
 
 export default new UserService();
