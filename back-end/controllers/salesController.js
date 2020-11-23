@@ -10,6 +10,7 @@ const allSales = rescue(async (_req, res) => {
 
 const finishSales = rescue(async (req, res) => {
   const { id, total, address, number, date, products, status } = req.body;
+  console.log("id", id);
 
   const newSale = await salesServices.finishSalesServ(id, total, address, number, date, status);
 

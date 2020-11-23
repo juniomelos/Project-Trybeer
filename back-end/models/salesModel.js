@@ -34,6 +34,8 @@ const getAllSalesMod = async () => {
 
 const postFinishSalesMod = async (id, total, address, number, date, status = 'Pendente') => {
   try {
+  console.log("id - postFinishSalesMod", id);
+
     const db = await connection();
     await db
       .getTable('sales')
@@ -47,6 +49,8 @@ const postFinishSalesMod = async (id, total, address, number, date, status = 'Pe
       ])
       .values(id, total, address, number, date, status)
       .execute();
+  console.log("id - postFinishSalesMod 2", id);
+
     return { id, total, address, number, date, status };
   } catch (error) {
     return error;
