@@ -14,7 +14,7 @@ const Orders = () => {
   return (
     <div>
       <Header />
-      oreders page
+      orders page
     </div>
   );
 };
