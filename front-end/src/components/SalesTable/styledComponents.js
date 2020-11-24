@@ -36,10 +36,22 @@ export const SaleInfo = styled.td`
 export const StatusSignal = styled.div`
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: 15px;
   background-color: ${(props) =>
     props.status === 'Pendente' ? 'red' : 'green'};
-  width: 20px;
+  width: 35px;
   float: right;
   margin-right: 20px;
+`;
+
+export const ExpandButton = styled.button`
+  width: 50px;
+  border-radius: 15px;
+  float: right;
+  margin-right: 10px;
+  visibility: ${(props) => (props.display ? 'hidden' : 'visible')};
+`;
+
+export const SaleDetails = styled.tr`
+  display: ${(props) => (props.display ? 'table-row' : 'none')};
 `;

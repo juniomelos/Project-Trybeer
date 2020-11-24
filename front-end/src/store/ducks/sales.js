@@ -39,7 +39,7 @@ const salesReducer = (state = initialState, { type, payload }) => {
         },
       };
     case Types.ERROR:
-      return { ...state, errors: [...state.errors, payload.error] };
+      return { ...state, errors: payload.error };
     default:
       return state;
   }
