@@ -18,18 +18,22 @@ const Orders = () => {
   return (
     <div>
       {/* <Header /> */}
-      <section>
-        <header>
-          <h2>Pendentes</h2>
-        </header>
-        <SalesTable sales={sales.pending}/>
-      </section>
-      <section>
-        <header>
-          <h2>Entregues</h2>
-        </header>
-        <SalesTable sales={sales.delivered}/>
-      </section>
+      {sales.pending.length ? (
+        <section>
+          <header>
+            <h2>Pendentes</h2>
+          </header>
+          <SalesTable sales={sales.pending} />
+        </section>
+      ) : null}
+      {sales.delivered.length ? (
+        <section>
+          <header>
+            <h2>Entregues</h2>
+          </header>
+          <SalesTable sales={sales.delivered} />
+        </section>
+      ) : null}
     </div>
   );
 };

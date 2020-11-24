@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+/** Styled Components */
 import {
   Sale,
   SaleInfoLabel,
@@ -11,6 +14,9 @@ import {
 
 const SalesTable = ({ title, sales }) => {
   const [selectedSale, setselectedSale] = useState({});
+  const history = useHistory();
+
+  const handleRedirect = (saleId) => history.push(`/admin/orders/${saleId}`);
 
   return (
     <div>
@@ -29,13 +35,13 @@ const SalesTable = ({ title, sales }) => {
 
             return (
               <>
-                <Sale key={sale.id}>
+                <Sale key={sale.id} onClick={() => handleRedirect(sale.id)}>
                   <SaleInfo
                     size="10%"
                     position="center"
-                    data-testid={`${index}-order-number`}
+                    data-testid={`${indexs}-order-number`}
                   >
-                    {sale.id}
+                    {`Pedido ${sale.id}`}
                   </SaleInfo>
                   <SaleInfo
                     size="75%"
@@ -69,7 +75,7 @@ const SalesTable = ({ title, sales }) => {
                       .replace('.', ',')}`}</span>
                     Endereço de entrega:
                     <span
-                      data-testid={`${index}-order-adress`}
+                      data-testid={`${index}-order-address`}
                     >{`${sale.address}, ${sale.number}`}</span>
                   </td>
                   <td>

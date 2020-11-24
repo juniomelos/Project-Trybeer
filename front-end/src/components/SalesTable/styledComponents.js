@@ -49,9 +49,8 @@ export const ExpandButton = styled.button`
   border-radius: 15px;
   float: right;
   margin-right: 10px;
-  visibility: ${(props) => (props.display ? 'hidden' : 'visible')};
 `;
 
 export const SaleDetails = styled.tr`
-  display: ${(props) => (props.display ? 'table-row' : 'none')};
+visibility: ${(props) => (props.display ? 'visible' : 'visible')};
 `;
