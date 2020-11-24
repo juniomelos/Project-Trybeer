@@ -9,11 +9,13 @@ import './Header.css';
 const Header = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  let headTitle = 'TryBeer';
+  let headTitle = 'Detalhes de Pedido';
   const title = {
     '/profile': 'Meu perfil',
-    '/checkout': 'Cliente - Checkout',
     '/checkout': 'Finalizar Pedido',
+    '/orders': 'Meus Pedidos',
+    '/login':'TryBeer',
+    '/products':'TryBeer',
   };
   function handleClick() {
     dispatch(changeVisibility()); //async
