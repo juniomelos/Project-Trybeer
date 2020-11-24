@@ -1,6 +1,5 @@
 const { Router } = require('express');
-const { salesController } = require('../controllers');
-const { adminController } = require('../controllers');
+const { salesController, adminController } = require('../controllers');
 const middleware = require('../middlewares');
 
 const adminRouter = Router();

@@ -1,3 +1,4 @@
+const { functionsIn } = require('lodash');
 const { connection, simpleConnection } = require('./connection');
 
 const getAllSalesMod = async () => {
@@ -98,7 +99,6 @@ const getAdminOrderById = async (orderId) => {
       .execute();
 
     const result = await query.fetchAll();
-    console.log(result);
     return result.map(([sale_id, name, quantity, total_price, status, price]) => ({
       sale_id,
       name,

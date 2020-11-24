@@ -1,6 +1,7 @@
 const { connection } = require('./connection');
 
 const getUserByEmailMod = async (userEmail) => {
+  console.log('email model', userEmail);
   try {
     const db = await connection();
     const usersDB = await db
@@ -10,6 +11,7 @@ const getUserByEmailMod = async (userEmail) => {
       .bind('email', userEmail)
       .execute();
     const [id, name, email, password, role] = await usersDB.fetchOne();
+
     return {
       id,
       name,

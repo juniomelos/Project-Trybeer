@@ -2,10 +2,8 @@ const rescue = require('express-rescue');
 const { salesModel, usersModel } = require('../models');
 
 const getProfile = rescue(async (req, res) => {
-  const { email } = req.body;
-  console.log(email);
+  const { email } = req.user;
   const profile = await usersModel.getUserByEmailMod(email);
-  console.log('profile', profile);
 
   if (profile.email === undefined) throw new Error('email não cadastrado');
   const { id, password, role, ...newProfile } = profile;
