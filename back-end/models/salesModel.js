@@ -89,9 +89,9 @@ const getAdminOrderById = async (orderId) => {
     const db = await simpleConnection();
     const query = await db
       .sql(
-        `SELECT sale_id, name, price, quantity, total_price, sale_date, status FROM sales_products AS sp
-        INNER JOIN sales AS s ON s.id = sp.sale_id
-        INNER JOIN products AS p ON p.id = sp.product_id
+        `SELECT sale_id, name, quantity, total_price, status, price  FROM sales_products AS sp
+    INNER JOIN sales AS s ON s.id = sp.sale_id
+    INNER JOIN products AS p ON p.id = sp.product_id
     WHERE sale_id = ?
     `
       )
@@ -99,17 +99,14 @@ const getAdminOrderById = async (orderId) => {
       .execute();
 
     const result = await query.fetchAll();
-    return result.map(
-      ([sale_id, name, price, quantity, total_price, sale_date, status]) => ({
-        sale_id,
-        name,
-        price,
-        quantity,
-        total_price,
-        sale_date,
-        status,
-      })
-    );
+    return result.map(([sale_id, name, quantity, total_price, status, price]) => ({
+      sale_id,
+      name,
+      quantity,
+      total_price,
+      status,
+      price,
+    }));
   } catch (error) {}
 };
 
