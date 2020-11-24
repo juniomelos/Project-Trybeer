@@ -17,9 +17,9 @@ const Orders = () => {
 
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       {sales.pending.length ? (
-        <section>
+        <section  style={{display: 'flex', flexFlow: 'column'}}>
           <header>
             <h2>Pendentes</h2>
           </header>

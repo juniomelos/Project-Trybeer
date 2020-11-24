@@ -52,5 +52,5 @@ export const ExpandButton = styled.button`
 `;
 
 export const SaleDetails = styled.tr`
-visibility: ${(props) => (props.display ? 'visible' : 'visible')};
+  visibility: ${(props) => (props.display ? 'visible' : 'visible')};
 `;

@@ -39,7 +39,7 @@ const SalesTable = ({ title, sales }) => {
                   <SaleInfo
                     size="10%"
                     position="center"
-                    data-testid={`${indexs}-order-number`}
+                    data-testid={`${index}-order-number`}
                   >
                     {`Pedido ${sale.id}`}
                   </SaleInfo>
