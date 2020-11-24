@@ -18,7 +18,7 @@ class SalesService {
     return response;
   }
 
-  handleError = (error) => {
+  handleError(error) {
     let errorMsg;
     switch (error.response.status) {
       case 500:
@@ -32,11 +32,12 @@ class SalesService {
     }
 
     throw errorMsg;
-  };
+  }
 
   /** Get sales */
-  getSales = async (token) =>
-    this.http.get('/sales', { headers: { Authorization: token } });
+  async getSales(token) {
+    return this.http.get('/sales', { headers: { Authorization: token } });
+  }
 }
 
 export default new SalesService();

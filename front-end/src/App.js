@@ -48,49 +48,39 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route path="orders/:id" component={OrderDetail} />
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/register" component={ Register } />
+        <Route path="orders/:id" component={ OrderDetail } />
         <Route
           exact
           path="/orders"
-          render={() =>
-            requireAuth() ? <ClientOrders /> : <Redirect to="/login" />
-          }
+          render={ () => requireAuth() ? <ClientOrders /> : <Redirect to="/login" /> }
         />
         <Route
           exact
           path="/products"
-          render={() =>
-            requireAuth() ? <Products /> : <Redirect to="/login" />
-          }
+          render={ () => requireAuth() ? <Products /> : <Redirect to="/login" /> }
         />
         <Route
           exact
           path="/checkout"
-          render={() =>
-            requireAuth() ? <Checkout /> : <Redirect to="/login" />
-          }
+          render={ () => requireAuth() ? <Checkout /> : <Redirect to="/login" /> }
         />
         <Route
           exact
           path="/profile"
-          render={() =>
-            requireAuth() ? <ClientProfile /> : <Redirect to="/login" />
-          }
+          render={ () => requireAuth() ? <ClientProfile /> : <Redirect to="/login" /> }
         />
         <Route
           exact
           path="/admin/orders"
-          render={() => (requireAuth() ? <Orders /> : <Redirect to="/login" />)}
+          render={ () => (requireAuth() ? <Orders /> : <Redirect to="/login" />) }
         />
         <Route
           exact
           path="/admin/profile"
-          render={() =>
-            requireAuth() ? <AdminProfile /> : <Redirect to="/login" />
-          }
+          render={ () => requireAuth() ? <AdminProfile /> : <Redirect to="/login" /> }
         />
       </Switch>
     </Router>

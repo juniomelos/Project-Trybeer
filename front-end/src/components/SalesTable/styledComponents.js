@@ -23,22 +23,22 @@ export const SaleInfo = styled.td`
   width: ${(props) => props.size};
   text-align: ${(props) => props.position};
 
-  ${(props) =>
-    props.size === '75%'
-      ? css`
-          @media (max-width: 700px) {
-            width: 20%;
-          }
-        `
-      : null}
+  ${(props) => props
+    .size === '75%'
+    ? css`
+      @media (max-width: 700px) {
+        width: 20%;
+      }
+    `
+    : null}
 `;
 
 export const StatusSignal = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 15px;
-  background-color: ${(props) =>
-    props.status === 'Pendente' ? 'red' : 'green'};
+  background-color: ${(props) => props
+    .status === 'Pendente' ? 'red' : 'green'};
   width: 35px;
   float: right;
   margin-right: 20px;

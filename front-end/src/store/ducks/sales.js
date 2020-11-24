@@ -29,11 +29,9 @@ const salesReducer = (state = initialState, { type, payload }) => {
         ...state,
         sales: {
           pending: [
-            //...state.sales.pending,
             ...payload.sales.filter((sale) => sale.status === 'Pendente'),
           ],
           delivered: [
-            //...state.sales.pending,
             ...payload.sales.filter((sale) => sale.status === 'Entregue'),
           ],
         },
