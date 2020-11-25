@@ -27,7 +27,8 @@
     "lodash": "^4.17.20",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.4",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "styled-media-query": "^2.1.2"
   },
   "devDependencies": {
     "cypress": "^5.0.0",

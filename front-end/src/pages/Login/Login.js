@@ -1,11 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import FormLogin from '../../components/FormLogin';
+import FormLogin from '../../components/FormLogin/FormLogin';
 import { saveToLocalStorage } from '../../services/localStorage';
+import Video from '../../assets/videos/video.mp4';
+import LogoImage from '../../assets/images/cj-logo.png';
+
+/** Styled COmponents */
+import { ColorBg, LoginContainer, LoginVisualElem, Logo, VideoBg } from './style';
+import { Button } from '../../components/StyledComponents/buttons';
 
 const Login = () => {
-  const { token, isLoggedIn } = useSelector((state) => state.userReducer.session);
+  const { token, isLoggedIn } = useSelector(
+    (state) => state.userReducer.session
+  );
   const userData = useSelector((state) => state.userReducer.user);
   const history = useHistory();
 
@@ -18,9 +26,16 @@ const Login = () => {
   }, [isLoggedIn]);
 
   return (
-    <div>
+    <LoginContainer>
+      <LoginVisualElem>
+        <VideoBg autoPlay muted loop id="myVideo">
+          <source src={Video} type="video/mp4" />
+        </VideoBg>
+        <ColorBg />
+        <Logo src={LogoImage} />
+      </LoginVisualElem>
       <FormLogin />
-    </div>
+    </LoginContainer>
   );
 };
 
