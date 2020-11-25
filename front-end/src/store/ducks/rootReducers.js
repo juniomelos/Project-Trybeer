@@ -5,6 +5,7 @@ import sideBarHideReducer from './sideBarHide';
 import cartReducer from './productsCart';
 import productsReducer from './products';
 import ordersReducer from './orders';
+import salesProductsReducer from './salesProducts';
 
 const rootReducer = combineReducers({
   userReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   cartReducer,
   productsReducer,
   ordersReducer,
+  salesProductsReducer,
 });
 
 export default rootReducer;
