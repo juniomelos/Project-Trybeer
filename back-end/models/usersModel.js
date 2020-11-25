@@ -1,7 +1,7 @@
-const { connection } = require('./connection');
+const connection = require('./connection');
 
 const getUserByEmailMod = async (userEmail) => {
-  console.log('email model', userEmail);
+  // console.log('email model', userEmail);
   try {
     const db = await connection();
     const usersDB = await db
