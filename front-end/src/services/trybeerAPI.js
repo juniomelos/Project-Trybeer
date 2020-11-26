@@ -91,14 +91,15 @@ class UserService {
       },
     );
   }
+
   /** Get all orders */
-  getOrders = async (token) =>
-    this.http.get('/sales', {
+  async getOrders(token) {
+    return this.http.get('/sales', {
       headers: {
         Authorization: token,
       },
     });
-
+  }
   /** Get all Products from one (id) sale */
 
   async getSalesProducts(token, id) {

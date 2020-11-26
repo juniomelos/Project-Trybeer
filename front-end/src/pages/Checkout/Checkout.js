@@ -6,10 +6,10 @@ import CheckoutContainer from '../../components/CheckoutContainer';
 function Checkout() {
   return (
     <>
-    <Header /> 
-  <CheckoutContainer />
-  </>
-    );
+      <Header />
+      <CheckoutContainer />
+    </>
+  );
 }
 
 export default Checkout;

@@ -1,5 +1,5 @@
-const { functionsIn } = require('lodash');
-const { connection, simpleConnection } = require('./connection');
+const connection = require('./connection');
+const simpleConnection = require('./simpleConnection');
 
 const getAllSalesMod = async () => {
   try {
@@ -18,15 +18,7 @@ const getAllSalesMod = async () => {
       .execute();
     const allSales = await salesDB.fetchAll();
     return allSales.map(
-      ([
-        id,
-        userId,
-        totalPrice,
-        deliveryAddress,
-        deliveryNumber,
-        saleDate,
-        status,
-      ]) => ({
+      ([id, userId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status]) => ({
         id,
         userId,
         total: totalPrice,
@@ -34,21 +26,14 @@ const getAllSalesMod = async () => {
         number: deliveryNumber,
         date: saleDate,
         status,
-      })
+      }),
     );
   } catch (error) {
     return error;
   }
 };
 
-const postFinishSalesMod = async (
-  id,
-  total,
-  address,
-  number,
-  date,
-  status = 'Pendente'
-) => {
+const postFinishSalesMod = async (id, total, address, number, date, status = 'Pendente') => {
   try {
     const db = await connection();
     await db
@@ -90,25 +75,28 @@ const getAdminOrderById = async (orderId) => {
     const db = await simpleConnection();
     const query = await db
       .sql(
-        `SELECT sale_id, name, quantity, total_price, status, price  FROM sales_products AS sp
-    INNER JOIN sales AS s ON s.id = sp.sale_id
-    INNER JOIN products AS p ON p.id = sp.product_id
+        `SELECT sale_id, name, price, quantity, total_price, sale_date, status FROM sales_products AS sp
+        RIGHT JOIN sales AS s ON s.id = sp.sale_id
+        RIGHT JOIN products AS p ON p.id = sp.product_id
     WHERE sale_id = ?
-    `
+    `,
       )
       .bind(orderId)
       .execute();
 
     const result = await query.fetchAll();
-    return result.map(([sale_id, name, quantity, total_price, status, price]) => ({
+    return result.map(([sale_id, name, price, quantity, total_price, sale_date, status]) => ({
       sale_id,
       name,
+      price,
       quantity,
       total_price,
+      sale_date,
       status,
-      price,
     }));
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 };
 
 module.exports = {
