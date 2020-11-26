@@ -12,7 +12,7 @@ export const Types = {
 /** Reducers */
 
 const initialState = {
-  postOrderSuccess: false,
+  getSalesProductsSuccess: false,
   errors: [],
   salesProducts: [],
 };
@@ -23,7 +23,7 @@ const salesProductsReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         salesProducts: payload,
-        postOrderSuccess: true,
+        getSalesProductsSuccess: true,
       };
     case Types.ERROR_SALES_PRODUCTS:
       return {
@@ -54,8 +54,13 @@ export const hasErrored = (error) => ({
 /** Actions Creators */
 
 export const getSalesProducts = (token, id) => (dispatch) => {
+  console.log('getSalesProducts', token, id);
   UserService.getSalesProducts(token, id)
-    .then((res) => dispatch(addSalesProducts(res.data)))
+    .then((res) => {
+      console.log('res - getSalesProducts', res);
+      return dispatch(addSalesProducts(res.data));
+    })
+
     .catch((error) => dispatch(hasErrored(error)));
 };
 

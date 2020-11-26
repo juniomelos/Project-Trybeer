@@ -1,4 +1,5 @@
 const connection = require('./connection');
+const simpleConnection = require('./simpleConnection');
 
 const getAllSalesMod = async () => {
   try {
@@ -69,7 +70,37 @@ const updateStatusMod = async (id, status) => {
   }
 };
 
+const getAdminOrderById = async (orderId) => {
+  try {
+    const db = await simpleConnection();
+    const query = await db
+      .sql(
+        `SELECT sale_id, name, price, quantity, total_price, sale_date, status FROM sales_products AS sp
+        RIGHT JOIN sales AS s ON s.id = sp.sale_id
+        RIGHT JOIN products AS p ON p.id = sp.product_id
+    WHERE sale_id = ?
+    `,
+      )
+      .bind(orderId)
+      .execute();
+
+    const result = await query.fetchAll();
+    return result.map(([sale_id, name, price, quantity, total_price, sale_date, status]) => ({
+      sale_id,
+      name,
+      price,
+      quantity,
+      total_price,
+      sale_date,
+      status,
+    }));
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
+  getAdminOrderById,
   getAllSalesMod,
   postFinishSalesMod,
   updateStatusMod,

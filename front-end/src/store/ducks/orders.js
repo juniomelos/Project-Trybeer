@@ -37,7 +37,7 @@ const ordersReducer = (state = initialState, { type, payload }) => {
         ...state,
         errors: [
           ...state.errors,
-          `${payload.error.code} mess: ${payload.error.message}`,
+          `${payload.error} mess: ${payload.error}`,
         ],
       };
 

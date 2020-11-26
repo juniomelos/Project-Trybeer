@@ -15,7 +15,7 @@ import Products from './pages/Products/Products';
 import Checkout from './pages/Checkout/Checkout';
 import ClientOrders from './pages/ClientOrders/ClientOrders';
 import ClientProfile from './pages/ClientProfile/ClientProfile';
-import OrderDetail from './pages/OrderDetail/OrderDetail';
+import OrderDetail from './pages/OrderDetail/index';
 import './App.css';
 import AdminProfile from './pages/AdminProfile';
 import Orders from './pages/Orders';
@@ -51,7 +51,17 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route path="orders/:id" component={OrderDetail} />
+        {/* <Route
+          path="/orders/:id"
+          component={OrderDetail}
+
+        /> */}
+        <Route
+          path="/orders/:id"
+          render={(props) =>
+            requireAuth() ? <OrderDetail dataFromOrders={props}/> : <Redirect to="/login" />
+          }
+        />
         <Route
           exact
           path="/orders"
