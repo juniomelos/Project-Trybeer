@@ -103,6 +103,7 @@ class UserService {
   /** Get all Products from one (id) sale */
 
   async getSalesProducts(token, id) {
+    console.log('token, id',token, id);
     return this.http.get(`/admin/orders/${id}`, {
       headers: {
         Authorization: token,

@@ -14,7 +14,9 @@ const OrderDetail = (props) => {
 
   // Fetch all products form one sale at first render
   useEffect(() => {
-    dispatch(getSalesProducts(session.token, props.match.params.id));
+    dispatch(
+      getSalesProducts(session.token, props.dataFromOrders.match.params.id),
+    );
   }, []);
 
   let newDate = '';
@@ -23,21 +25,30 @@ const OrderDetail = (props) => {
   return (
     <>
       <Header />
-      <h3 data-testid="order-number">Pedido {props.match.params.id}</h3>
-      <h3 data-testid="order-date">{props.location.state.date}</h3>
-      {getSalesProductsSuccess &&
-        salesProducts.map((product, i) => (
-          <div className="cardContainer" key={product.name}>
-            <h3 data-testid={`${i}-product-qtd`}> {product.quantity} - </h3>
+      <h1>test</h1>
+      <h3 data-testid="order-number">
+        Pedido {props.dataFromOrders.match.params.id}
+      </h3>
+      {getSalesProductsSuccess && (
+        <div>
+          <h3 data-testid="order-date">
+            {props.dataFromOrders.location.state.date}
+          </h3>
+          {salesProducts.map((product, i) => (
+            <div className="cardContainer" key={product.name}>
+              <h3 data-testid={`${i}-product-qtd`}> {product.quantity} - </h3>
 
-            <h3 data-testid={`${i}-product-name`}> {product.name}</h3>
-            <h3 data-testid={`${i}-product-total-value`}>
-             R$ {product.price.toFixed(2).toString().replace('.', ',')}
-            </h3>
-          </div>
-        ))}
-
-      <h3>R$ {props.location.state.totalPrice}</h3>
+              <h3 data-testid={`${i}-product-name`}> {product.name}</h3>
+              <h3 data-testid={`${i}-product-total-value`}>
+                R$ {product.price.toFixed(2).toString().replace('.', ',')}
+              </h3>
+            </div>
+          ))}
+          <h3 data-testid="order-total-value">
+            R$ {props.dataFromOrders.location.state.totalPrice}
+          </h3>
+        </div>
+      )}
     </>
   );
 };
