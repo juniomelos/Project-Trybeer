@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -10,6 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #282d36;
   color: whitesmoke;
+  font-family: 'Open Sans', sans-serif;
 }
 
 code {

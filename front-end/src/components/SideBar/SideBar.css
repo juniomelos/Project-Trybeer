@@ -1,0 +1,26 @@
+.side-menu-container,
+.admin-side-bar-container {
+  background-color: #1e2228;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* justify-content: start; */
+
+  padding: 30px 15px;
+  height: 100vh;
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0px;
+}
+
+/* li {
+  border: 1px solid white;
+  margin-top: 15px;
+  padding: 5px;
+  text-align: center;
+} */

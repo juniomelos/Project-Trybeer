@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import hamburger from '../images/hamburger.png';
 import { changeVisibility } from '../store/ducks/sideBarHide';
-import SideBar from '../components/SideBar';
+import SideBar from './SideBar/SideBar';
 import './Header.css';
 import { useState } from 'react';
 
@@ -35,14 +35,14 @@ const Header = (props) => {
     headTitle = title[location.pathname];
   return (
     <div>
-      <div className="headerContainer">
+      {/* <div className="headerContainer">
         <button data-testid="top-hamburguer" onClick={() => handleClick()}>
           <img src={hamburger} alt="test" height="80px" />
         </button>
         <div className="headTitleContainer">
           <h1 data-testid="top-title">{headTitle}</h1>
         </div>
-      </div>
+      </div> */}
       <div className="sidebar">
         {(sidebarVisible || role === 'administrator') && <SideBar />}
       </div>
